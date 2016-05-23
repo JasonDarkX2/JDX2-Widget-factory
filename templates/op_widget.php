@@ -17,9 +17,9 @@ parent::__construct(
 // Base ID of your widget
   'opwidget',
         // Widget name will appear in UI
-__('optionWidget', 'WM_widget_domain'),
+__('Option Widget', 'WM_widget_domain'),
         // Widget description
-array( 'description' => __( 'A simple wordpress Widgetwith options', 'WM_widget_domain' ), ) 
+array( 'description' => __( 'A simple wordpress Widget with options', 'WM_widget_domain' ), ) 
 );
 }
 // Creating widget front-end
@@ -35,6 +35,7 @@ public function form( $instance ) {
     //admin form
     $title = $instance[ 'title' ];
     $text = $instance[ 'text' ];
+    $dropList = $instance[ 'dropList' ];
     ?>
 <p>
    <label for="title">Title</label>
@@ -50,6 +51,20 @@ public function form( $instance ) {
    id="<?php echo $this->get_field_id( 'text' ); ?>" 
    name="<?php echo $this->get_field_name( 'text' ); ?>"  
    ><?php echo esc_attr( $text);?></textarea>
+    <br/>
+    <label for="options">DropDown List:</label>
+ <select name="<?php echo$this->get_field_name( 'dropList'); ?>">
+        <option value="">Options</option>
+           <?php 
+    $options=array('1','2','3','4','5');
+    foreach($options as $t) {
+    if(strcmp($instance['dropList'],$t)==0){
+   echo  '<option value="'. $t .'" selected>' . stripslashes($t) .'</option>';
+    }else{
+        echo  '<option value="'. $t .'">' . stripslashes($t) .'</option>';
+    }
+} ?>
+    </select>
 </p>
 <?php }
 
@@ -58,6 +73,7 @@ public function update( $new_instance, $old_instance ) {
     $instance = array();
     $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
     $instance['text'] = ( ! empty( $new_instance['text'] ) ) ? strip_tags( $new_instance['text'] ) : '';
+    $instance['dropList'] = ( ! empty( $new_instance['dropList'] ) ) ? strip_tags( $new_instance['dropList'] ) : '';
     return $instance;
 }
 function op_widget() {
