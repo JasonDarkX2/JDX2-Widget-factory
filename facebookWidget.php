@@ -83,9 +83,10 @@ public function update( $new_instance, $old_instance ) {
     $instance['dropList'] = ( ! empty( $new_instance['dropList'] ) ) ? strip_tags( $new_instance['dropList'] ) : '';
     return $instance;
 }
-function op_widget() {
+}
+function fb_widget() {
 	register_widget( 'fb_widget' );
 }
-}
+
 add_action( 'widgets_init', 'fb_widget' );
  ?>
