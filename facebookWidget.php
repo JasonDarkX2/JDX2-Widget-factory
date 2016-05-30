@@ -28,7 +28,7 @@ $title="Facebook";
     echo $args['before_widget'];
     echo $args['before_title'] . $instance['title'] . $args['after_title'];
 ?>
-<div class="fb-page" data-href="<?php echo $instance['url'] ?>" data-small-header="false" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="false">
+<div class="fb-page" data-href="<?php echo $instance['url'] ?>" data-small-header="<?php echo $instance['cover'] ?>" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="false">
     <div class="fb-xfbml-parse-ignore">
         <blockquote cite="<?php echo $instance['url'] ?>"><a href="<?php echo $instance['url'] ?>">Facebook</a>
         </blockquote>
@@ -43,6 +43,7 @@ public function form( $instance ) {
     $title = $instance[ 'title' ];
     $url = $instance[ 'url' ];
     $dropList = $instance[ 'dropList' ];
+    $cover = $instance[ 'cover' ];
     ?>
 <p>
    <label for="title">Title</label>
@@ -60,6 +61,15 @@ public function form( $instance ) {
    type="text"
    value="<?php echo esc_attr( $url);?>"</input>
     <br/>
+    <label for="title">Show Cover Image:</label>
+   <input 
+   id="<?php echo $this->get_field_id( 'cover' ); ?>" 
+   name="<?php echo $this->get_field_name( 'cover' ); ?>" 
+   type="checkbox" 
+   value="true"
+   <?php checked( $cover,1);  ?>
+   />
+   <br/>
     <label for="options">DropDown List:</label>
  <select name="<?php echo$this->get_field_name( 'dropList'); ?>">
         <option value="">Options</option>
@@ -81,6 +91,11 @@ public function update( $new_instance, $old_instance ) {
     $instance = array();
     $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
     $instance['url'] = ( ! empty( $new_instance['url'] ) ) ? strip_tags( $new_instance['url'] ) : '';
+    if(isset($new_instance['cover'])){ 
+    $instance['cover'] = TRUE;
+    }else{
+        $instance['cover'] = FALSE;
+    }
     $instance['dropList'] = ( ! empty( $new_instance['dropList'] ) ) ? strip_tags( $new_instance['dropList'] ) : '';
     return $instance;
 }
