@@ -28,9 +28,9 @@ $title="Facebook";
     echo $args['before_widget'];
     echo $args['before_title'] . $instance['title'] . $args['after_title'];
 ?>
-<div class="fb-page" data-href="https://www.facebook.com/facebook" data-small-header="false" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="false">
+<div class="fb-page" data-href="<?php echo $instance['url'] ?>" data-small-header="false" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="false">
     <div class="fb-xfbml-parse-ignore">
-        <blockquote cite="https://www.facebook.com/facebook"><a href="https://www.facebook.com/facebook">Facebook</a>
+        <blockquote cite="<?php echo $instance['url'] ?>"><a href="<?php echo $instance['url'] ?>">Facebook</a>
         </blockquote>
     </div>
 </div>
@@ -41,7 +41,7 @@ $title="Facebook";
 public function form( $instance ) {
     //admin form
     $title = $instance[ 'title' ];
-    $text = $instance[ 'text' ];
+    $url = $instance[ 'url' ];
     $dropList = $instance[ 'dropList' ];
     ?>
 <p>
@@ -53,11 +53,12 @@ public function form( $instance ) {
    value="<?php echo esc_attr( $title ); ?>" 
    />
    <br/>
-    <label for="text">Text</label>
-    <textarea 
-   id="<?php echo $this->get_field_id( 'text' ); ?>" 
-   name="<?php echo $this->get_field_name( 'text' ); ?>"  
-   ><?php echo esc_attr( $text);?></textarea>
+    <label for="text">FaceBook Page URL:</label>
+    <input
+   id="<?php echo $this->get_field_id( 'url' ); ?>" 
+   name="<?php echo $this->get_field_name( 'url' ); ?>" 
+   type="text"
+   value="<?php echo esc_attr( $url);?>"</input>
     <br/>
     <label for="options">DropDown List:</label>
  <select name="<?php echo$this->get_field_name( 'dropList'); ?>">
@@ -79,7 +80,7 @@ public function form( $instance ) {
 public function update( $new_instance, $old_instance ) {
     $instance = array();
     $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-    $instance['text'] = ( ! empty( $new_instance['text'] ) ) ? strip_tags( $new_instance['text'] ) : '';
+    $instance['url'] = ( ! empty( $new_instance['url'] ) ) ? strip_tags( $new_instance['url'] ) : '';
     $instance['dropList'] = ( ! empty( $new_instance['dropList'] ) ) ? strip_tags( $new_instance['dropList'] ) : '';
     return $instance;
 }
