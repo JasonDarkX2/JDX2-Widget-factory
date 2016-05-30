@@ -35,6 +35,7 @@ public function form( $instance ) {
     //admin form
     $title = $instance[ 'title' ];
     $text = $instance[ 'text' ];
+    $check = $instance[ 'check' ];
     $dropList = $instance[ 'dropList' ];
     ?>
 <p>
@@ -52,6 +53,15 @@ public function form( $instance ) {
    name="<?php echo $this->get_field_name( 'text' ); ?>"  
    ><?php echo esc_attr( $text);?></textarea>
     <br/>
+     <label for="title">Check Box:</label>
+   <input 
+   id="<?php echo $this->get_field_id( 'check' ); ?>" 
+   name="<?php echo $this->get_field_name( 'check' ); ?>" 
+   type="checkbox" 
+   value="true"
+   <?php checked( $check,1);  ?>
+   />
+   <br/>
     <label for="options">DropDown List:</label>
  <select name="<?php echo$this->get_field_name( 'dropList'); ?>">
         <option value="">Options</option>
@@ -74,6 +84,11 @@ public function update( $new_instance, $old_instance ) {
     $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
     $instance['text'] = ( ! empty( $new_instance['text'] ) ) ? strip_tags( $new_instance['text'] ) : '';
     $instance['dropList'] = ( ! empty( $new_instance['dropList'] ) ) ? strip_tags( $new_instance['dropList'] ) : '';
+    if(isset($new_instance['check'])){ 
+    $instance['check'] = TRUE;
+    }else{
+        $instance['check'] = FALSE;
+    }
     return $instance;
 }
 }
