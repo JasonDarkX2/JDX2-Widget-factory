@@ -28,7 +28,7 @@ $title="Facebook";
     echo $args['before_widget'];
     echo $args['before_title'] . $instance['title'] . $args['after_title'];
 ?>
-<div class="fb-page" data-href="<?php echo $instance['url'] ?>" data-small-header="" data-adapt-container-width="true" data-hide-cover="<?php echo $instance['cover'] ?>" data-show-facepile="false">
+<div class="fb-page" data-href="<?php echo $instance['url'] ?>" data-small-header="<?php echo $instance['header'] ?>" data-adapt-container-width="true" data-hide-cover="<?php echo $instance['cover'] ?>" data-show-facepile="false">
     <div class="fb-xfbml-parse-ignore">
         <blockquote cite="<?php echo $instance['url'] ?>"><a href="<?php echo $instance['url'] ?>">Facebook</a>
         </blockquote>
@@ -44,6 +44,7 @@ public function form( $instance ) {
     $url = $instance[ 'url' ];
     $dropList = $instance[ 'dropList' ];
     $cover = $instance[ 'cover' ];
+    $cover = $instance[ 'header' ];
     ?>
 <p>
    <label for="title">Title</label>
@@ -65,6 +66,15 @@ public function form( $instance ) {
    <input 
    id="<?php echo $this->get_field_id( 'cover' ); ?>" 
    name="<?php echo $this->get_field_name( 'cover' ); ?>" 
+   type="checkbox" 
+   value="true"
+   <?php checked( $cover,1);  ?>
+   />
+   <br/>
+    <label for="title">Use Small Header:</label>
+   <input 
+   id="<?php echo $this->get_field_id( 'header' ); ?>" 
+   name="<?php echo $this->get_field_name( 'header' ); ?>" 
    type="checkbox" 
    value="true"
    <?php checked( $cover,1);  ?>
@@ -95,6 +105,11 @@ public function update( $new_instance, $old_instance ) {
     $instance['cover'] = TRUE;
     }else{
         $instance['cover'] = FALSE;
+    }
+     if(isset($new_instance['header'])){ 
+    $instance['header'] = TRUE;
+    }else{
+        $instance['header'] = FALSE;
     }
     $instance['dropList'] = ( ! empty( $new_instance['dropList'] ) ) ? strip_tags( $new_instance['dropList'] ) : '';
     return $instance;
