@@ -28,7 +28,7 @@ $title="Facebook";
     echo $args['before_widget'];
     echo $args['before_title'] . $instance['title'] . $args['after_title'];
 ?>
-<div class="fb-page" data-href="<?php echo $instance['url'] ?>" data-small-header="<?php echo $instance['cover'] ?>" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="false">
+<div class="fb-page" data-href="<?php echo $instance['url'] ?>" data-small-header="" data-adapt-container-width="true" data-hide-cover="<?php echo $instance['cover'] ?>" data-show-facepile="false">
     <div class="fb-xfbml-parse-ignore">
         <blockquote cite="<?php echo $instance['url'] ?>"><a href="<?php echo $instance['url'] ?>">Facebook</a>
         </blockquote>
