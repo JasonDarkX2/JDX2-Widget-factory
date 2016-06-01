@@ -28,7 +28,13 @@ $title="Facebook";
     echo $args['before_widget'];
     echo $args['before_title'] . $instance['title'] . $args['after_title'];
 ?>
-<div class="fb-page" data-href="<?php echo $instance['url']; ?>" data-small-header="<?php echo $instance['header']; ?>" data-adapt-container-width="true" data-hide-cover="<?php echo $instance['cover']; ?>" data-show-facepile="<?php echo $instance['faces']; ?>">
+<?php 
+$status=array();
+foreach(array_slice($instance,2) as $i => $v){
+        echo $i .'<br/>';
+    $status[$i] = ($v) ? 'true' : 'false';
+}?>
+<div class="fb-page" data-href="<?php echo $instance['url']; ?>" data-small-header="<?php echo $status['header']; ?>" data-adapt-container-width="true" data-hide-cover="<?php echo $status['cover']; ?>" data-show-facepile="<?php echo $status['faces']; ?>">
     <div class="fb-xfbml-parse-ignore">
         <blockquote cite="<?php echo $instance['url']; ?>"><a href="<?php echo $instance['url']; ?>">Facebook</a>
         </blockquote>
