@@ -31,7 +31,6 @@ $title="Facebook";
 <?php 
 $status=array();
 foreach(array_slice($instance,2) as $i => $v){
-        echo $i .'<br/>';
     $status[$i] = ($v) ? 'true' : 'false';
 }?>
 <div class="fb-page" data-href="<?php echo $instance['url']; ?>" data-small-header="<?php echo $status['header']; ?>" data-adapt-container-width="true" data-hide-cover="<?php echo $status['cover']; ?>" data-show-facepile="<?php echo $status['faces']; ?>">
