@@ -116,20 +116,12 @@ public function update( $new_instance, $old_instance ) {
     $instance = array();
     $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
     $instance['url'] = ( ! empty( $new_instance['url'] ) ) ? strip_tags( $new_instance['url'] ) : '';
-    if(isset($new_instance['cover'])){ 
-    $instance['cover'] = TRUE;
-    }else{
-        $instance['cover'] = FALSE;
-    }
-     if(isset($new_instance['header'])){ 
-    $instance['header'] = TRUE;
-    }else{
-        $instance['header'] = FALSE;
-    }
-         if(isset($new_instance['faces'])){ 
-    $instance['faces'] = TRUE;
-    }else{
-        $instance['faces'] = FALSE;
+    foreach(array_slice($new_instance,2) as $i => $v){
+      if(isset($v)){
+          $instance[$i]=TRUE;
+      }else{
+          $instance[$i]=FALSE;
+      }
     }
     $instance['dropList'] = ( ! empty( $new_instance['dropList'] ) ) ? strip_tags( $new_instance['dropList'] ) : '';
     return $instance;
