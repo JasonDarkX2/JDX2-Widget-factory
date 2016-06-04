@@ -33,7 +33,7 @@ $status=array();
 foreach(array_slice($instance,2) as $i => $v){
     $status[$i] = ($v) ? 'true' : 'false';
 }?>
-<div class="fb-page" data-href="<?php echo $instance['url']; ?>" data-small-header="<?php echo $status['header']; ?>" data-adapt-container-width="true" data-hide-cover="<?php echo $status['cover']; ?>" data-show-facepile="<?php echo $status['faces']; ?>">
+<div class="fb-page" data-href="<?php echo $instance['url']; ?>" data-tabs="<?php echo $instance['tabs']; ?>" data-small-header="<?php echo $status['header']; ?>" data-adapt-container-width="true" data-hide-cover="<?php echo $status['cover']; ?>" data-show-facepile="<?php echo $status['faces']; ?>">
     <div class="fb-xfbml-parse-ignore">
         <blockquote cite="<?php echo $instance['url']; ?>"><a href="<?php echo $instance['url']; ?>">Facebook</a>
         </blockquote>
@@ -51,6 +51,7 @@ public function form( $instance ) {
     $cover = $instance[ 'cover' ];
     $cover = $instance[ 'header' ];
      $faces = $instance[ 'faces' ];
+     $yabs = $instance[ 'tabs' ];
     ?>
 <p>
    <label for="title">Title</label>
@@ -95,13 +96,13 @@ public function form( $instance ) {
    <?php checked( $faces,1);  ?>
    />
    <br/>
-    <label for="options">DropDown List:</label>
- <select name="<?php echo$this->get_field_name( 'dropList'); ?>">
-        <option value="">Options</option>
+    <label for="options">Tabs:</label>
+ <select name="<?php echo$this->get_field_name( 'tabs'); ?>">
+        <option value=" ">Options</option>
            <?php 
-    $options=array('1','2','3','4','5');
+    $options=array('timeline','event','message','timeline,event,message','none');
     foreach($options as $t) {
-    if(strcmp($instance['dropList'],$t)==0){
+    if(strcmp($instance['tabs'],$t)==0){
    echo  '<option value="'. $t .'" selected>' . stripslashes($t) .'</option>';
     }else{
         echo  '<option value="'. $t .'">' . stripslashes($t) .'</option>';
@@ -123,7 +124,7 @@ public function update( $new_instance, $old_instance ) {
           $instance[$i]=FALSE;
       }
     }
-    $instance['dropList'] = ( ! empty( $new_instance['dropList'] ) ) ? strip_tags( $new_instance['dropList'] ) : '';
+    $instance['tabs'] = ( ! empty( $new_instance['tabs'] ) ) ? strip_tags( $new_instance['tabs'] ) : '';
     return $instance;
 }
 }
