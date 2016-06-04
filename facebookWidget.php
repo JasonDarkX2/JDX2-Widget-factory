@@ -33,7 +33,7 @@ $status=array();
 foreach(array_slice($instance,2) as $i => $v){
     $status[$i] = ($v) ? 'true' : 'false';
 }?>
-<div class="fb-page" data-href="<?php echo $instance['url']; ?>" data-tabs="<?php echo $instance['tabs']; ?>" data-small-header="<?php echo $status['header']; ?>" data-adapt-container-width="true" data-hide-cover="<?php echo $status['cover']; ?>" data-show-facepile="<?php echo $status['faces']; ?>">
+<div class="fb-page" data-href="<?php echo $instance['url']; ?>" data-tabs="<?php echo $instance['tabs']; ?>" data-small-header="<?php echo $status['header']; ?>" data-adapt-container-width="true" data-hide-cover="<?php echo $status['cover']; ?>"  data-show-facepile="<?php echo $status['faces']; ?>">
     <div class="fb-xfbml-parse-ignore">
         <blockquote cite="<?php echo $instance['url']; ?>"><a href="<?php echo $instance['url']; ?>">Facebook</a>
         </blockquote>
@@ -49,7 +49,7 @@ public function form( $instance ) {
     $url = $instance[ 'url' ];
     $dropList = $instance[ 'dropList' ];
     $cover = $instance[ 'cover' ];
-    $cover = $instance[ 'header' ];
+    $header = $instance[ 'header' ];
      $faces = $instance[ 'faces' ];
      $yabs = $instance[ 'tabs' ];
     ?>
@@ -69,13 +69,13 @@ public function form( $instance ) {
    type="text"
    value="<?php echo esc_attr( $url);?>"</input>
     <br/>
-    <label for="title">Show Cover Image:</label>
+    <label for="title">Hide Cover Image:</label>
    <input 
    id="<?php echo $this->get_field_id( 'cover' ); ?>" 
    name="<?php echo $this->get_field_name( 'cover' ); ?>" 
    type="checkbox" 
    value="true"
-   <?php checked( $cover,1);  ?>
+   <?php checked(1,$cover);  ?>
    />
    <br/>
     <label for="title">Use Small Header:</label>
@@ -84,7 +84,7 @@ public function form( $instance ) {
    name="<?php echo $this->get_field_name( 'header' ); ?>" 
    type="checkbox" 
    value="true"
-   <?php checked( $cover,1);  ?>
+   <?php checked( 1,$header);  ?>
    />
    <br/>
    <label for="title">Show Friend's Faces:</label>
@@ -93,7 +93,7 @@ public function form( $instance ) {
    name="<?php echo $this->get_field_name( 'faces' ); ?>" 
    type="checkbox" 
    value="true"
-   <?php checked( $faces,1);  ?>
+   <?php checked( 1,$faces);  ?>
    />
    <br/>
     <label for="options">Tabs:</label>
