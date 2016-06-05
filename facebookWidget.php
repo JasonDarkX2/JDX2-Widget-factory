@@ -33,7 +33,12 @@ $status=array();
 foreach(array_slice($instance,2) as $i => $v){
     $status[$i] = ($v) ? 'true' : 'false';
 }?>
-<div class="fb-page" data-href="<?php echo $instance['url']; ?>" data-tabs="<?php echo $instance['tabs']; ?>" data-small-header="<?php echo $status['header']; ?>" data-adapt-container-width="true" data-hide-cover="<?php echo $status['cover']; ?>"  data-show-facepile="<?php echo $status['faces']; ?>">
+<div class="fb-page" data-href="<?php echo $instance['url']; ?>" 
+     data-tabs="<?php echo $instance['tabs']; ?>" 
+     data-small-header="<?php echo $status['header']; ?>" 
+     data-adapt-container-width="true" 
+     data-hide-cover="<?php echo $status['cover']; ?>"  
+     data-show-facepile="<?php echo $status['faces']; ?>">
     <div class="fb-xfbml-parse-ignore">
         <blockquote cite="<?php echo $instance['url']; ?>"><a href="<?php echo $instance['url']; ?>">Facebook</a>
         </blockquote>
@@ -51,7 +56,7 @@ public function form( $instance ) {
     $cover = $instance[ 'cover' ];
     $header = $instance[ 'header' ];
      $faces = $instance[ 'faces' ];
-     $yabs = $instance[ 'tabs' ];
+     $tabs = $instance[ 'tabs' ];
     ?>
 <p>
    <label for="title">Title</label>
@@ -93,16 +98,16 @@ public function form( $instance ) {
    name="<?php echo $this->get_field_name( 'faces' ); ?>" 
    type="checkbox" 
    value="true"
-   <?php checked( 1,$faces);  ?>
+   <?php checked( 1, $faces);  ?>
    />
    <br/>
     <label for="options">Tabs:</label>
- <select name="<?php echo$this->get_field_name( 'tabs'); ?>">
+ <select name="<?php echo $this->get_field_name( 'tabs'); ?>">
         <option value=" ">Options</option>
            <?php 
     $options=array('timeline','event','message','timeline,event,message','none');
     foreach($options as $t) {
-    if(strcmp($instance['tabs'],$t)==0){
+    if(strcmp($tabs,$t)==0){
    echo  '<option value="'. $t .'" selected>' . stripslashes($t) .'</option>';
     }else{
         echo  '<option value="'. $t .'">' . stripslashes($t) .'</option>';
