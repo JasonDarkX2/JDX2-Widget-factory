@@ -40,7 +40,9 @@ foreach(array_slice($instance,2) as $i => $v){
      data-hide-cover="<?php echo $status['cover']; ?>"  
      data-show-facepile="<?php echo $status['faces']; ?>">
     <div class="fb-xfbml-parse-ignore">
-        <blockquote cite="<?php echo $instance['url']; ?>"><a href="<?php echo $instance['url']; ?>">Facebook</a>
+        <blockquote cite="<?php echo $instance['url']; ?>">
+            <a href="<?php echo $instance['url']; ?>">
+                <?php echo  $instance['name']; ?></a>
         </blockquote>
     </div>
 </div>
@@ -57,8 +59,10 @@ public function form( $instance ) {
     $header = $instance[ 'header' ];
      $faces = $instance[ 'faces' ];
      $tabs = $instance[ 'tabs' ];
+     $name = $instance[ 'name'];
     ?>
 <p>
+    
    <label for="title">Title</label>
    <input 
    id="<?php echo $this->get_field_id( 'title' ); ?>" 
@@ -130,6 +134,9 @@ public function update( $new_instance, $old_instance ) {
       }
     }
     $instance['tabs'] = ( ! empty( $new_instance['tabs'] ) ) ? strip_tags( $new_instance['tabs'] ) : '';
+    $matches=  array();
+    $yup=preg_match("/[^\/]+$/",$instance['url'],$matches);
+    $instance['name']=$matches[0];
     return $instance;
 }
 }
