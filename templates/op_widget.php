@@ -24,7 +24,7 @@ array( 'description' => __( 'A simple wordpress Widget with options', 'WM_widget
 }
 // Creating widget front-end
 public function widget( $args, $instance ) {
-$title="This is a standard wordpress Widget";
+$title="This is a standard wordpress Widget with options";
     echo $args['before_widget'];
     echo $args['before_title'] . $instance['title'] . $args['after_title'];
     echo  $instance['text'];
