@@ -38,7 +38,7 @@ class fb_widget extends WP_Widget {
         <div class="fb-page" data-href="<?php echo $instance['url']; ?>" 
              data-tabs="<?php echo $instance['tabs']; ?>" 
              data-small-header="<?php echo $status['header']; ?>" 
-             data-adapt-container-width="true" 
+             data-adapt-container-width="<?php echo $status['adpwidth']; ?>" 
              data-hide-cover="<?php echo $status['cover']; ?>"  
              data-show-facepile="<?php echo $status['faces']; ?>">
             <div class="fb-xfbml-parse-ignore">
@@ -61,6 +61,7 @@ class fb_widget extends WP_Widget {
         $cover = $instance['cover'];
         $header = $instance['header'];
         $faces = $instance['faces'];
+        $adpwidth = $instance['adpwidth'];
         $tabs = $instance['tabs'];
         $name = $instance['name'];
         ?>
@@ -106,6 +107,15 @@ class fb_widget extends WP_Widget {
                 type="checkbox" 
                 value="true"
         <?php checked(1, $faces); ?>
+                />
+            <br/>
+              <label for="title">Adapt to widget container width:</label>
+            <input 
+                id="<?php echo $this->get_field_id('adpwidth'); ?>" 
+                name="<?php echo $this->get_field_name('adpwidth'); ?>" 
+                type="checkbox" 
+                value="true"
+        <?php checked(1, $adpwidth); ?>
                 />
             <br/>
             <label for="options">Tabs:</label>
