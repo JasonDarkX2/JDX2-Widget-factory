@@ -38,6 +38,7 @@ class fb_widget extends WP_Widget {
         <div class="fb-page" data-href="<?php echo $instance['url']; ?>" 
              data-tabs="<?php echo $instance['tabs']; ?>" 
              data-small-header="<?php echo $status['header']; ?>" 
+             data-width="<?php echo $instance['width']; ?>" 
              data-adapt-container-width="<?php echo $status['adpwidth']; ?>" 
              data-hide-cover="<?php echo $status['cover']; ?>"  
              data-show-facepile="<?php echo $status['faces']; ?>">
@@ -64,6 +65,7 @@ class fb_widget extends WP_Widget {
         $adpwidth = $instance['adpwidth'];
         $tabs = $instance['tabs'];
         $name = $instance['name'];
+        $width = $instance['width'];
         ?>
         <p>
 
@@ -118,6 +120,18 @@ class fb_widget extends WP_Widget {
         <?php checked(1, $adpwidth); ?>
                 />
             <br/>
+            <label for="title">width:</label>
+            <br/>
+            <input 
+                id="<?php echo $this->get_field_id('width'); ?>" 
+                name="<?php echo $this->get_field_name('width'); ?>" 
+                type="range"
+                min="180"
+                max="500"
+                step="1"
+                value="<?php echo $width;?>"
+                />
+            <br/>
             <label for="options">Tabs:</label>
             <select name="<?php echo $this->get_field_name('tabs'); ?>">
                 <option value=" ">Options</option>
@@ -148,6 +162,7 @@ class fb_widget extends WP_Widget {
                 $instance[$i] = FALSE;
             }
         }
+        $instance['width'] =($new_instance['width']>500||$new_instance['width']<180 ? 180 :$new_instance['width'] );
         $instance['tabs'] = (!empty($new_instance['tabs']) ) ? strip_tags($new_instance['tabs']) : '';
         $matches = array();
         $yup = preg_match("/[^\/]+$/", $instance['url'], $matches);
