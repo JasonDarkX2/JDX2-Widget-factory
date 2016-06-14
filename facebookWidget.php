@@ -120,9 +120,9 @@ class fb_widget extends WP_Widget {
         <?php checked(1, $adpwidth); ?>
                 />
             <br/>
-            <label for="title">width:</label>
+            <label for="title"> Facebook embed width:</label>
             <br/>
-            <input 
+            180<input 
                 id="<?php echo $this->get_field_id('width'); ?>" 
                 name="<?php echo $this->get_field_name('width'); ?>" 
                 type="range"
@@ -130,7 +130,7 @@ class fb_widget extends WP_Widget {
                 max="500"
                 step="1"
                 value="<?php echo $width;?>"
-                />
+                />500
             <br/>
             <label for="options">Tabs:</label>
             <select name="<?php echo $this->get_field_name('tabs'); ?>">
