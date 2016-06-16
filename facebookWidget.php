@@ -155,12 +155,8 @@ class fb_widget extends WP_Widget {
         $instance = array();
         $instance['title'] = (!empty($new_instance['title']) ) ? strip_tags($new_instance['title']) : '';
         $instance['url'] = (!empty($new_instance['url']) ) ? strip_tags($new_instance['url']) : '';
-        foreach (array_slice($new_instance, 2) as $i => $v) {
-            if (isset($v)) {
-                $instance[$i] = TRUE;
-            } else {
-                $instance[$i] = FALSE;
-            }
+        foreach (array_slice($old_instance, 2) as $i => $v) {
+            $instance[$i] = (isset($new_instance[$i]) && $new_instance[$i]!=NULL) ? true : false;
         }
         $instance['width'] =($new_instance['width']>500||$new_instance['width']<180 ? 180 :$new_instance['width'] );
         $instance['tabs'] = (!empty($new_instance['tabs']) ) ? strip_tags($new_instance['tabs']) : '';
