@@ -26,7 +26,7 @@ array( 'description' => __( 'A simple Twitter Widget', 'WM_widget_domain' ), )
 public function widget( $args, $instance ) {
 $title="Twitter Widget";
     echo $args['before_widget'];
-    output($username,$id);
+    output($instance['username'],$instance['id']);
     echo $args['after_widget'];
 }
 // Widget Backend 
@@ -34,6 +34,7 @@ public function form( $instance ) {
     //admin form
     $username = $instance[ 'username' ];
     $height = $instance[ 'height' ];
+    $id = $instance[ 'id' ];
     $option = $instance[ 'option' ];
     $theme = $instance[ 'theme' ];
     ?>
@@ -46,6 +47,12 @@ public function form( $instance ) {
    value="<?php echo esc_attr( $username ); ?>" 
    />
    <br/>
+   <label for="text">Widget ID</label>
+    <input  type="text"
+   id="<?php echo $this->get_field_id( 'id' ); ?>" 
+   name="<?php echo $this->get_field_name( 'id' ); ?>"  
+   value="<?php echo esc_attr( $id);?>"/>
+    <br/>
     <label for="text">height</label>
     <textarea 
    id="<?php echo $this->get_field_id( 'height' ); ?>" 
@@ -80,9 +87,10 @@ public function form( $instance ) {
 // updating widget instances
 public function update( $new_instance, $old_instance ) {
     $instance = array();
-    $instance['username'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-    $instance['height'] = ( ! empty( $new_instance['text'] ) ) ? strip_tags( $new_instance['text'] ) : '';
-    $instance['theme'] = ( ! empty( $new_instance['dropList'] ) ) ? strip_tags( $new_instance['theme'] ) : '';
+    $instance['username'] = ( ! empty( $new_instance['username'] ) ) ? strip_tags( $new_instance['username'] ) : '';
+    $instance['height'] = ( ! empty( $new_instance['height'] ) ) ? strip_tags( $new_instance['height'] ) : '';
+    $instance['theme'] = ( ! empty( $new_instance['theme'] ) ) ? strip_tags( $new_instance['theme'] ) : '';
+    $instance['id'] = ( ! empty( $new_instance['id'] ) ) ? strip_tags( $new_instance['id'] ) : '';
     if(isset($new_instance['option'])){ 
     $instance['option'] = TRUE;
     }else{
@@ -92,9 +100,9 @@ public function update( $new_instance, $old_instance ) {
 }
 }
 function output($username,$id){?>
-                <a class="twitter-timeline"  href="https://twitter.com/<?php echo $username; ?>" data-widget-id="<?php echo $id; ?>">Tweets by @<?php echo $username; ?></a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-            </script>
+
+<a class="twitter-timeline"  href="https://twitter.com/<?php echo $username;?>" data-widget-id="<?php echo $id; ?>">Tweets by @<?php echo $username; ?></a>
+    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <?php }
 function tw_widget() {
