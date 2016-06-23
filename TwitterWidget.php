@@ -34,7 +34,6 @@ public function form( $instance ) {
     //admin form
     $username = $instance[ 'username' ];
     $height = $instance[ 'height' ];
-    $id = $instance[ 'id' ];
     $option = $instance[ 'option' ];
     $theme = $instance[ 'theme' ];
     ?>
@@ -47,12 +46,6 @@ public function form( $instance ) {
    value="<?php echo esc_attr( $username ); ?>" 
    />
    <br/>
-   <label for="text">Widget ID</label>
-    <input  type="text"
-   id="<?php echo $this->get_field_id( 'id' ); ?>" 
-   name="<?php echo $this->get_field_name( 'id' ); ?>"  
-   value="<?php echo esc_attr( $id);?>"/>
-    <br/>
     <label for="text">height</label>
     <textarea 
    id="<?php echo $this->get_field_id( 'height' ); ?>" 
@@ -90,7 +83,6 @@ public function update( $new_instance, $old_instance ) {
     $instance['username'] = ( ! empty( $new_instance['username'] ) ) ? strip_tags( $new_instance['username'] ) : '';
     $instance['height'] = ( ! empty( $new_instance['height'] ) ) ? strip_tags( $new_instance['height'] ) : '';
     $instance['theme'] = ( ! empty( $new_instance['theme'] ) ) ? strip_tags( $new_instance['theme'] ) : '';
-    $instance['id'] = ( ! empty( $new_instance['id'] ) ) ? strip_tags( $new_instance['id'] ) : '';
     if(isset($new_instance['option'])){ 
     $instance['option'] = TRUE;
     }else{
@@ -99,9 +91,13 @@ public function update( $new_instance, $old_instance ) {
     return $instance;
 }
 }
-function output($username,$id){?>
+function output($username){?>
 
-<a class="twitter-timeline"  href="https://twitter.com/<?php echo $username;?>" data-widget-id="<?php echo $id; ?>">Tweets by @<?php echo $username; ?></a>
+ 
+<a class="twitter-timeline" data-theme="dark"   href="https://twitter.com/<?php echo $username;?>" 
+   width="300"
+   height="300">
+    Tweets by @<?php echo $username; ?></a>
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <?php }
