@@ -26,7 +26,7 @@ array( 'description' => __( 'A simple Twitter Widget', 'WM_widget_domain' ), )
 public function widget( $args, $instance ) {
 $title="Twitter Widget";
     echo $args['before_widget'];
-    output($instance['username'],$instance['id']);
+    output($instance);
     echo $args['after_widget'];
 }
 // Widget Backend 
@@ -63,9 +63,8 @@ public function form( $instance ) {
    <br/>
     <label for="options">theme:</label>
  <select name="<?php echo$this->get_field_name( 'theme'); ?>">
-        <option value="">Options</option>
            <?php 
-    $options=array('1','2','3','4','5');
+    $options=array('Light','Dark');
     foreach($options as $t) {
     if(strcmp($instance['theme'],$t)==0){
    echo  '<option value="'. $t .'" selected>' . stripslashes($t) .'</option>';
@@ -91,10 +90,10 @@ public function update( $new_instance, $old_instance ) {
     return $instance;
 }
 }
-function output($username){?>
+function output($instance){?>
 
  
-<a class="twitter-timeline" data-theme="dark"   href="https://twitter.com/<?php echo $username;?>" 
+<a class="twitter-timeline" data-theme="<?php echo $instance['theme'];  ?>"   href="https://twitter.com/<?php echo $instance['username'];?>" 
    width="300"
    height="300">
     Tweets by @<?php echo $username; ?></a>
