@@ -24,21 +24,30 @@ array( 'description' => __( 'A simple Twitter Widget', 'WM_widget_domain' ), )
 }
 // Creating widget front-end
 public function widget( $args, $instance ) {
-$title="Twitter Widget";
     echo $args['before_widget'];
+    echo $args['before_title'] . $instance['title'] . $args['after_title'];
     output($instance);
     echo $args['after_widget'];
 }
 // Widget Backend 
 public function form( $instance ) {
     //admin form
+     $title = $instance[ 'title' ];
     $username = $instance[ 'username' ];
     $height = $instance[ 'height' ];
     $option = $instance[ 'option' ];
     $theme = $instance[ 'theme' ];
     ?>
 <p>
-   <label for="title">Username</label>
+      <label for="Title">Title:</label>
+   <input 
+   id="<?php echo $this->get_field_id( 'title' ); ?>" 
+   name="<?php echo $this->get_field_name( 'title' ); ?>" 
+   type="text" 
+   value="<?php echo esc_attr( $title ); ?>" 
+   />
+   <br/>
+   <label for="username">Username:</label>
    <input 
    id="<?php echo $this->get_field_id( 'username' ); ?>" 
    name="<?php echo $this->get_field_name( 'username' ); ?>" 
@@ -46,7 +55,7 @@ public function form( $instance ) {
    value="<?php echo esc_attr( $username ); ?>" 
    />
    <br/>
-    <label for="text">height</label>
+    <label for="text">height:</label>
     <textarea 
    id="<?php echo $this->get_field_id( 'height' ); ?>" 
    name="<?php echo $this->get_field_name( 'height' ); ?>"  
@@ -61,7 +70,7 @@ public function form( $instance ) {
    <?php checked( $option,1);  ?>
    />
    <br/>
-    <label for="options">theme:</label>
+    <label for="theme">theme:</label>
  <select name="<?php echo$this->get_field_name( 'theme'); ?>">
            <?php 
     $options=array('Light','Dark');
@@ -79,6 +88,7 @@ public function form( $instance ) {
 // updating widget instances
 public function update( $new_instance, $old_instance ) {
     $instance = array();
+    $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
     $instance['username'] = ( ! empty( $new_instance['username'] ) ) ? strip_tags( $new_instance['username'] ) : '';
     $instance['height'] = ( ! empty( $new_instance['height'] ) ) ? strip_tags( $new_instance['height'] ) : '';
     $instance['theme'] = ( ! empty( $new_instance['theme'] ) ) ? strip_tags( $new_instance['theme'] ) : '';
