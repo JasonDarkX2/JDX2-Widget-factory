@@ -55,12 +55,30 @@ public function form( $instance ) {
    value="<?php echo esc_attr( $username ); ?>" 
    />
    <br/>
-    <label for="text">height:</label>
-    <textarea 
-   id="<?php echo $this->get_field_id( 'height' ); ?>" 
-   name="<?php echo $this->get_field_name( 'height' ); ?>"  
-   ><?php echo esc_attr( $text);?></textarea>
-    <br/>
+   <label for="text">height:</label>
+   200<input
+           id="<?php echo $this->get_field_id('height'); ?>" 
+           name="<?php echo $this->get_field_name('height'); ?>"  
+           type="range"
+           min="200"
+           max="1080"
+           step="1"
+           value="<?php echo $width; ?>"
+           value="<?php echo esc_attr($text); ?>"
+           />1080
+   <br>
+     <label for="text">width:</label>
+   200<input
+           id="<?php echo $this->get_field_id('width'); ?>" 
+           name="<?php echo $this->get_field_name('width'); ?>"  
+           type="range"
+           min="220"
+           max="2000"
+           step="1"
+           value="<?php echo $width; ?>"
+           value="<?php echo esc_attr($text); ?>"
+           />20000
+           <br/>
      <label for="title">exclude replies:</label>
    <input 
    id="<?php echo $this->get_field_id( 'option' ); ?>" 
