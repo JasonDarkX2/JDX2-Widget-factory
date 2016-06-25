@@ -35,6 +35,7 @@ public function form( $instance ) {
      $title = $instance[ 'title' ];
     $username = $instance[ 'username' ];
     $height = $instance[ 'height' ];
+    $width=$instance['width'];
     $option = $instance[ 'option' ];
     $theme = $instance[ 'theme' ];
     ?>
@@ -63,8 +64,7 @@ public function form( $instance ) {
            min="200"
            max="1080"
            step="1"
-           value="<?php echo $width; ?>"
-           value="<?php echo esc_attr($text); ?>"
+           value="<?php echo $height; ?>"
            />1080
    <br>
      <label for="text">width:</label>
@@ -76,7 +76,6 @@ public function form( $instance ) {
            max="2000"
            step="1"
            value="<?php echo $width; ?>"
-           value="<?php echo esc_attr($text); ?>"
            />20000
            <br/>
      <label for="title">exclude replies:</label>
@@ -109,6 +108,7 @@ public function update( $new_instance, $old_instance ) {
     $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
     $instance['username'] = ( ! empty( $new_instance['username'] ) ) ? strip_tags( $new_instance['username'] ) : '';
     $instance['height'] = ( ! empty( $new_instance['height'] ) ) ? strip_tags( $new_instance['height'] ) : '';
+    $instance['width'] = ( ! empty( $new_instance['width'] ) ) ? strip_tags( $new_instance['width'] ) : '';
     $instance['theme'] = ( ! empty( $new_instance['theme'] ) ) ? strip_tags( $new_instance['theme'] ) : '';
     if(isset($new_instance['option'])){ 
     $instance['option'] = TRUE;
@@ -122,8 +122,8 @@ function output($instance){?>
 
  
 <a class="twitter-timeline" data-theme="<?php echo $instance['theme'];  ?>"   href="https://twitter.com/<?php echo $instance['username'];?>" 
-   width="300"
-   height="300">
+   width="<?php echo $instance['width']; ?>"
+   height="<?php echo $instance['height']; ?>">
     Tweets by @<?php echo $username; ?></a>
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
