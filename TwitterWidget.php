@@ -36,8 +36,10 @@ public function form( $instance ) {
     $username = $instance[ 'username' ];
     $height = $instance[ 'height' ];
     $width=$instance['width'];
-    $option = $instance[ 'option' ];
+    $replies = $instance[ 'replies' ];
     $theme = $instance[ 'theme' ];
+    $footer = $instance[ 'footer' ];
+    var_dump($instance);
     ?>
 <p>
       <label for="Title">Title:</label>
@@ -76,19 +78,28 @@ public function form( $instance ) {
            max="2000"
            step="1"
            value="<?php echo $width; ?>"
-           />20000
+           />2000
            <br/>
      <label for="title">exclude replies:</label>
    <input 
-   id="<?php echo $this->get_field_id( 'option' ); ?>" 
-   name="<?php echo $this->get_field_name( 'option' ); ?>" 
+   id="<?php echo $this->get_field_id( 'replies' ); ?>" 
+   name="<?php echo $this->get_field_name( 'replies' ); ?>" 
    type="checkbox" 
    value="true"
-   <?php checked( $option,1);  ?>
+   <?php checked( $replies,1);  ?>
+   />
+   <br/>
+   <label for="title">No footer</label>
+   <input 
+   id="<?php echo $this->get_field_id( 'footer' ); ?>" 
+   name="<?php echo $this->get_field_name( 'footer' ); ?>" 
+   type="checkbox" 
+   value="true"
+   <?php checked( $footer,1);  ?>
    />
    <br/>
     <label for="theme">theme:</label>
- <select name="<?php echo$this->get_field_name( 'theme'); ?>">
+ <select name="<?php echo $this->get_field_name( 'theme'); ?>">
            <?php 
     $options=array('Light','Dark');
     foreach($options as $t) {
@@ -110,10 +121,15 @@ public function update( $new_instance, $old_instance ) {
     $instance['height'] = ( ! empty( $new_instance['height'] ) ) ? strip_tags( $new_instance['height'] ) : '';
     $instance['width'] = ( ! empty( $new_instance['width'] ) ) ? strip_tags( $new_instance['width'] ) : '';
     $instance['theme'] = ( ! empty( $new_instance['theme'] ) ) ? strip_tags( $new_instance['theme'] ) : '';
-    if(isset($new_instance['option'])){ 
-    $instance['option'] = TRUE;
+    if(count($new_instance)>count($old_instance)){
+        $splice=count($new_instance)-count($old_instance);
+            foreach (array_slice($new_instance, $splice) as $i => $v) {
+            $instance[$i] = (isset($new_instance[$i]) && $new_instance[$i]!=NULL) ? true : false;
+        }
     }else{
-        $instance['option'] = FALSE;
+    foreach (array_slice($old_instance, 5) as $i => $v) {
+            $instance[$i] = (isset($new_instance[$i]) && $new_instance[$i]!=NULL) ? true : false;
+        }
     }
     return $instance;
 }
@@ -123,7 +139,9 @@ function output($instance){?>
  
 <a class="twitter-timeline" data-theme="<?php echo $instance['theme'];  ?>"   href="https://twitter.com/<?php echo $instance['username'];?>" 
    width="<?php echo $instance['width']; ?>"
-   height="<?php echo $instance['height']; ?>">
+   height="<?php echo $instance['height']; ?>"
+    data-chrome="<?php if($instance['footer']){echo 'nofooter';}?>"
+   >
     Tweets by @<?php echo $username; ?></a>
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
