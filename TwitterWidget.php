@@ -38,7 +38,8 @@ public function form( $instance ) {
     $width=$instance['width'];
     $replies = $instance[ 'replies' ];
     $theme = $instance[ 'theme' ];
-    $footer = $instance[ 'footer' ];
+    $footer = $instance[ 'nofooter' ];
+    $header = $instance[ 'noheader' ];
     var_dump($instance);
     ?>
 <p>
@@ -89,10 +90,19 @@ public function form( $instance ) {
    <?php checked( $replies,1);  ?>
    />
    <br/>
+    <label for="title">No Header</label>
+   <input 
+   id="<?php echo $this->get_field_id( 'noheader' ); ?>" 
+   name="<?php echo $this->get_field_name( 'noheader' ); ?>" 
+   type="checkbox" 
+   value="true"
+   <?php checked( $header,1);  ?>
+   />
+   <br/>
    <label for="title">No footer</label>
    <input 
-   id="<?php echo $this->get_field_id( 'footer' ); ?>" 
-   name="<?php echo $this->get_field_name( 'footer' ); ?>" 
+   id="<?php echo $this->get_field_id( 'nofooter' ); ?>" 
+   name="<?php echo $this->get_field_name( 'nofooter' ); ?>" 
    type="checkbox" 
    value="true"
    <?php checked( $footer,1);  ?>
@@ -140,7 +150,7 @@ function output($instance){?>
 <a class="twitter-timeline" data-theme="<?php echo $instance['theme'];  ?>"   href="https://twitter.com/<?php echo $instance['username'];?>" 
    width="<?php echo $instance['width']; ?>"
    height="<?php echo $instance['height']; ?>"
-    data-chrome="<?php if($instance['footer']){echo 'nofooter';}?>"
+    data-chrome="<?php  foreach (array_slice($instance, 5) as $i => $v) {if($v){echo $i .' ';}}?>"
    >
     Tweets by @<?php echo $username; ?></a>
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
