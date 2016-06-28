@@ -35,11 +35,12 @@ public function form( $instance ) {
      $title = $instance[ 'title' ];
     $username = $instance[ 'username' ];
     $height = $instance[ 'height' ];
-    $width=$instance['width'];
+    $width= $instance['width'];
     $replies = $instance[ 'replies' ];
     $theme = $instance[ 'theme' ];
     $footer = $instance[ 'nofooter' ];
     $header = $instance[ 'noheader' ];
+    $border = $instance[ 'noborders' ];
     var_dump($instance);
     ?>
 <p>
@@ -90,7 +91,7 @@ public function form( $instance ) {
    <?php checked( $replies,1);  ?>
    />
    <br/>
-    <label for="title">No Header</label>
+    <label for="title">Hide Header</label>
    <input 
    id="<?php echo $this->get_field_id( 'noheader' ); ?>" 
    name="<?php echo $this->get_field_name( 'noheader' ); ?>" 
@@ -99,13 +100,22 @@ public function form( $instance ) {
    <?php checked( $header,1);  ?>
    />
    <br/>
-   <label for="title">No footer</label>
+   <label for="title">Hide footer</label>
    <input 
    id="<?php echo $this->get_field_id( 'nofooter' ); ?>" 
    name="<?php echo $this->get_field_name( 'nofooter' ); ?>" 
    type="checkbox" 
    value="true"
    <?php checked( $footer,1);  ?>
+   />
+   <br/>
+    <label for="title">Hide Borders</label>
+   <input 
+   id="<?php echo $this->get_field_id( 'noborders' ); ?>" 
+   name="<?php echo $this->get_field_name( 'noborders' ); ?>" 
+   type="checkbox" 
+   value="true"
+   <?php checked( $border,1);  ?>
    />
    <br/>
     <label for="theme">theme:</label>
