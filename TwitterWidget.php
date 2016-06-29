@@ -41,6 +41,7 @@ public function form( $instance ) {
     $footer = $instance[ 'nofooter' ];
     $header = $instance[ 'noheader' ];
     $border = $instance[ 'noborders' ];
+    $border = $instance[ 'noscrollbar' ];
     var_dump($instance);
     ?>
 <p>
@@ -113,6 +114,15 @@ public function form( $instance ) {
    <input 
    id="<?php echo $this->get_field_id( 'noborders' ); ?>" 
    name="<?php echo $this->get_field_name( 'noborders' ); ?>" 
+   type="checkbox" 
+   value="true"
+   <?php checked( $border,1);  ?>
+   />
+   <br/>
+     <label for="title">Hide Scrollbar</label>
+   <input 
+   id="<?php echo $this->get_field_id( 'noscrollbar' ); ?>" 
+   name="<?php echo $this->get_field_name( 'noscrollbar' ); ?>" 
    type="checkbox" 
    value="true"
    <?php checked( $border,1);  ?>
