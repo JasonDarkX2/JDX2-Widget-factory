@@ -41,8 +41,7 @@ public function form( $instance ) {
     $footer = $instance[ 'nofooter' ];
     $header = $instance[ 'noheader' ];
     $border = $instance[ 'noborders' ];
-    $border = $instance[ 'noscrollbar' ];
-    var_dump($instance);
+    $scrollbar = $instance[ 'noscrollbar' ];
     ?>
 <p>
       <label for="Title">Title:</label>
@@ -83,51 +82,11 @@ public function form( $instance ) {
            value="<?php echo $width; ?>"
            />2000
            <br/>
-     <label for="title">exclude replies:</label>
-   <input 
-   id="<?php echo $this->get_field_id( 'replies' ); ?>" 
-   name="<?php echo $this->get_field_name( 'replies' ); ?>" 
-   type="checkbox" 
-   value="true"
-   <?php checked( $replies,1);  ?>
-   />
-   <br/>
-    <label for="title">Hide Header</label>
-   <input 
-   id="<?php echo $this->get_field_id( 'noheader' ); ?>" 
-   name="<?php echo $this->get_field_name( 'noheader' ); ?>" 
-   type="checkbox" 
-   value="true"
-   <?php checked( $header,1);  ?>
-   />
-   <br/>
-   <label for="title">Hide footer</label>
-   <input 
-   id="<?php echo $this->get_field_id( 'nofooter' ); ?>" 
-   name="<?php echo $this->get_field_name( 'nofooter' ); ?>" 
-   type="checkbox" 
-   value="true"
-   <?php checked( $footer,1);  ?>
-   />
-   <br/>
-    <label for="title">Hide Borders</label>
-   <input 
-   id="<?php echo $this->get_field_id( 'noborders' ); ?>" 
-   name="<?php echo $this->get_field_name( 'noborders' ); ?>" 
-   type="checkbox" 
-   value="true"
-   <?php checked( $border,1);  ?>
-   />
-   <br/>
-     <label for="title">Hide Scrollbar</label>
-   <input 
-   id="<?php echo $this->get_field_id( 'noscrollbar' ); ?>" 
-   name="<?php echo $this->get_field_name( 'noscrollbar' ); ?>" 
-   type="checkbox" 
-   value="true"
-   <?php checked( $border,1);  ?>
-   />
-   <br/>
+           <?php
+               foreach (array_slice($instance, 5) as $i => $v) {
+                   $this->output_option($i, $v,$this);
+        }      
+           ?>
     <label for="theme">theme:</label>
  <select name="<?php echo $this->get_field_name( 'theme'); ?>">
            <?php 
@@ -152,7 +111,7 @@ public function update( $new_instance, $old_instance ) {
     $instance['width'] = ( ! empty( $new_instance['width'] ) ) ? strip_tags( $new_instance['width'] ) : '';
     $instance['theme'] = ( ! empty( $new_instance['theme'] ) ) ? strip_tags( $new_instance['theme'] ) : '';
     if(count($new_instance)>count($old_instance)){
-        $splice=count($new_instance)-count($old_instance);
+        $splice=count($old_instance);
             foreach (array_slice($new_instance, $splice) as $i => $v) {
             $instance[$i] = (isset($new_instance[$i]) && $new_instance[$i]!=NULL) ? true : false;
         }
@@ -163,6 +122,33 @@ public function update( $new_instance, $old_instance ) {
     }
     return $instance;
 }
+function output_option($type,$checked){?>
+<?php switch ($type){
+    case 'replies':
+         echo'<label for="title">Exclude replies:</label>';
+        break;
+    case 'nofooter':
+        echo '<label for="title">Hide Footer</label>';
+        break;
+    case 'noheader':
+        echo '<label for="title">Hide Header</label>';
+        break;
+    case 'noborders':
+        echo '<label for="title">Hide Border</label>';
+        break;
+    case 'noscrollbar':
+        echo '<label for="title">Hide Scrollbar</label>';
+        break;
+} ?>
+  <input 
+   id="<?php echo $this->get_field_id( $type ); ?>" 
+   name="<?php echo $this->get_field_name( $type ); ?>" 
+   type="checkbox" 
+   value="true"
+   <?php checked($checked,1);  ?>
+   />
+   <br/>
+<?php }
 }
 function output($instance){?>
 
