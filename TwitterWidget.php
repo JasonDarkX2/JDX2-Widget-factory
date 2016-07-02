@@ -11,6 +11,7 @@ Author URI:http://www.jasondarkx2.com/
 <?php
 
 class tw_widget extends WP_Widget {
+    public $parameters=array('replies','nofooter','noheader','noborders','noscrollbar','transparent');
 
 function __construct() {
 parent::__construct(
@@ -32,16 +33,12 @@ public function widget( $args, $instance ) {
 // Widget Backend 
 public function form( $instance ) {
     //admin form
-     $title = $instance[ 'title' ];
-    $username = $instance[ 'username' ];
-    $height = $instance[ 'height' ];
-    $width= $instance['width'];
-    $replies = $instance[ 'replies' ];
-    $theme = $instance[ 'theme' ];
-    $footer = $instance[ 'nofooter' ];
-    $header = $instance[ 'noheader' ];
-    $border = $instance[ 'noborders' ];
-    $scrollbar = $instance[ 'noscrollbar' ];
+foreach ($this->parameters as $i) {
+    if(!isset($instance[$i])){
+        $instance[$i]=FALSE;
+    }
+}
+var_dump($instance);
     ?>
 <p>
       <label for="Title">Title:</label>
@@ -49,7 +46,7 @@ public function form( $instance ) {
    id="<?php echo $this->get_field_id( 'title' ); ?>" 
    name="<?php echo $this->get_field_name( 'title' ); ?>" 
    type="text" 
-   value="<?php echo esc_attr( $title ); ?>" 
+   value="<?php echo esc_attr( $instance['title'] ); ?>" 
    />
    <br/>
    <label for="username">Username:</label>
@@ -57,7 +54,7 @@ public function form( $instance ) {
    id="<?php echo $this->get_field_id( 'username' ); ?>" 
    name="<?php echo $this->get_field_name( 'username' ); ?>" 
    type="text" 
-   value="<?php echo esc_attr( $username ); ?>" 
+   value="<?php echo esc_attr( $instance['username'] ); ?>" 
    />
    <br/>
    <label for="text">height:</label>
@@ -68,7 +65,7 @@ public function form( $instance ) {
            min="200"
            max="1080"
            step="1"
-           value="<?php echo $height; ?>"
+           value="<?php echo $instance['height']; ?>"
            />1080
    <br>
      <label for="text">width:</label>
@@ -79,12 +76,12 @@ public function form( $instance ) {
            min="220"
            max="2000"
            step="1"
-           value="<?php echo $width; ?>"
+           value="<?php echo $instance['width']; ?>"
            />2000
            <br/>
            <?php
-               foreach (array_slice($instance, 5) as $i => $v) {
-                   $this->output_option($i, $v,$this);
+               foreach ($this->parameters as $i) {
+                   $this->output_option($i, $instance[$i]);
         }      
            ?>
     <label for="theme">theme:</label>
@@ -105,21 +102,14 @@ public function form( $instance ) {
 // updating widget instances
 public function update( $new_instance, $old_instance ) {
     $instance = array();
+    foreach ($this->parameters as $i) {
+            $instance[$i] = (isset($new_instance[$i]) && $new_instance[$i]!=NULL) ? true : false;
+        }
     $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
     $instance['username'] = ( ! empty( $new_instance['username'] ) ) ? strip_tags( $new_instance['username'] ) : '';
     $instance['height'] = ( ! empty( $new_instance['height'] ) ) ? strip_tags( $new_instance['height'] ) : '';
     $instance['width'] = ( ! empty( $new_instance['width'] ) ) ? strip_tags( $new_instance['width'] ) : '';
     $instance['theme'] = ( ! empty( $new_instance['theme'] ) ) ? strip_tags( $new_instance['theme'] ) : '';
-    if(count($new_instance)>count($old_instance)){
-        $splice=count($old_instance);
-            foreach (array_slice($new_instance, $splice) as $i => $v) {
-            $instance[$i] = (isset($new_instance[$i]) && $new_instance[$i]!=NULL) ? true : false;
-        }
-    }else{
-    foreach (array_slice($old_instance, 5) as $i => $v) {
-            $instance[$i] = (isset($new_instance[$i]) && $new_instance[$i]!=NULL) ? true : false;
-        }
-    }
     return $instance;
 }
 function output_option($type,$checked){?>
@@ -138,6 +128,9 @@ function output_option($type,$checked){?>
         break;
     case 'noscrollbar':
         echo '<label for="title">Hide Scrollbar</label>';
+        break;
+        case 'transparent':
+        echo '<label for="title">Transparent background</label>';
         break;
 } ?>
   <input 
