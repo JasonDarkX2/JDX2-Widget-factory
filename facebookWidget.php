@@ -11,7 +11,7 @@
 <?php
 
 class fb_widget extends WP_Widget {
-
+public $statusParam=array('cover','header','faces','adpwidth');
     function __construct() {
         parent::__construct(
 // Base ID of your widget
@@ -21,6 +21,7 @@ class fb_widget extends WP_Widget {
                 // Widget description
                 array('description' => __('Facebook page plugin widget', 'WM_widget_domain'),)
         );
+        //wp_enqueue_script('script', '/'. basename(plugin_dir_url( __FILE__ )) . '/newjavascript.js', array('jquery'));
     }
 
 // Creating widget front-end
@@ -84,44 +85,12 @@ class fb_widget extends WP_Widget {
                 type="text"
                 value="<?php echo esc_attr($url); ?>"</input>
             <br/>
-            <label for="title">Hide Cover Image:</label>
-            <input 
-                id="<?php echo $this->get_field_id('cover'); ?>" 
-                name="<?php echo $this->get_field_name('cover'); ?>" 
-                type="checkbox" 
-                value="true"
-        <?php checked(1, $cover); ?>
-                />
-            <br/>
-            <label for="title">Use Small Header:</label>
-            <input 
-                id="<?php echo $this->get_field_id('header'); ?>" 
-                name="<?php echo $this->get_field_name('header'); ?>" 
-                type="checkbox" 
-                value="true"
-        <?php checked(1, $header); ?>
-                />
-            <br/>
-            <label for="title">Show Friend's Faces:</label>
-            <input 
-                id="<?php echo $this->get_field_id('faces'); ?>" 
-                name="<?php echo $this->get_field_name('faces'); ?>" 
-                type="checkbox" 
-                value="true"
-        <?php checked(1, $faces); ?>
-                />
-            <br/>
-              <label for="title">Adapt to widget container width:</label>
-            <input 
-                id="<?php echo $this->get_field_id('adpwidth'); ?>" 
-                name="<?php echo $this->get_field_name('adpwidth'); ?>" 
-                type="checkbox" 
-                value="true"
-        <?php checked(1, $adpwidth); ?>
-                />
-            <br/>
-            <label for="title"> Facebook embed width:</label>
-            <br/>
+                       <?php
+               foreach ($this->statusParam as $i) {
+                   $this->output_option($i, $instance[$i]);
+        }      
+           ?>
+            
             180<input 
                 id="<?php echo $this->get_field_id('width'); ?>" 
                 name="<?php echo $this->get_field_name('width'); ?>" 
@@ -131,6 +100,7 @@ class fb_widget extends WP_Widget {
                 step="1"
                 value="<?php echo $width;?>"
                 />500
+            <label id="displayrange"></label>
             <br/>
             <label for="options">Tabs:</label>
             <select name="<?php echo $this->get_field_name('tabs'); ?>">
@@ -153,11 +123,11 @@ class fb_widget extends WP_Widget {
 // updating widget instances
     public function update($new_instance, $old_instance) {
         $instance = array();
-        $instance['title'] = (!empty($new_instance['title']) ) ? strip_tags($new_instance['title']) : '';
-        $instance['url'] = (!empty($new_instance['url']) ) ? strip_tags($new_instance['url']) : '';
-        foreach (array_slice($old_instance, 2) as $i => $v) {
+                foreach ($this->statusParam as $i) {
             $instance[$i] = (isset($new_instance[$i]) && $new_instance[$i]!=NULL) ? true : false;
         }
+        $instance['title'] = (!empty($new_instance['title']) ) ? strip_tags($new_instance['title']) : '';
+        $instance['url'] = (!empty($new_instance['url']) ) ? strip_tags($new_instance['url']) : '';
         $instance['width'] =($new_instance['width']>500||$new_instance['width']<180 ? 180 :$new_instance['width'] );
         $instance['tabs'] = (!empty($new_instance['tabs']) ) ? strip_tags($new_instance['tabs']) : '';
         $matches = array();
@@ -165,7 +135,30 @@ class fb_widget extends WP_Widget {
         $instance['name'] = $matches[0];
         return $instance;
     }
-
+function output_option($type,$checked){?>
+        <?php switch ($type){
+            case 'cover':
+         echo'<label for="title">Hide Cover Image:</label>';
+        break;
+    case 'header':
+        echo '<label for="title">Small Header:</label>';
+        break;
+    case 'faces':
+        echo '<label for="title">Show Friend Faces:</label>';
+        break;
+    case 'adpwidth':
+        echo '<label for="title">Adapt to widget container width:</label>';
+        break;
+        }?>
+     <input 
+   id="<?php echo $this->get_field_id( $type ); ?>" 
+   name="<?php echo $this->get_field_name( $type ); ?>" 
+   type="checkbox" 
+   value="true"
+   <?php checked($checked,1);  ?>
+   />
+     <br/>
+    <?php }
 }
 
 function fb_widget() {
