@@ -11,9 +11,19 @@ Author URI:http://www.jasondarkx2.com/
 <?php
 
 class tw_widget extends WP_Widget {
-    public $parameters=array('replies','nofooter','noheader','noborders','noscrollbar','transparent');
 
-function __construct() {
+    public $parameters = array('replies', 'nofooter', 'noheader', 'noborders', 'noscrollbar', 'transparent');
+    public $lang = array(
+        'en' => 'English (default)', 'ar' => 'Arabic', 'bn' => 'Bengali', 'cs' => 'Czech', 'da' => 'Danish',
+        'de' => 'German', 'el' => 'Greek', 'es' => 'Spanish', 'fa' => 'Persian', 'fi' => 'Finnish',
+        'fil' => 'Filipino', 'fr' => 'French', 'he' => 'Hebrew', 'hi' => 'Hindi', 'hu' => 'Hungarian',
+        'id' => 'Indonesian', 'it' => 'Italian', 'ja' => 'Japanese', 'ko' => 'Korean', 'msa' => 'Malay',
+        'nl' => 'Dutch', 'no' => 'Norwegian', 'pl' => 'Polish', 'pt' => 'Portuguese', 'ro' => 'Romanian',
+        'ru' => 'Russian', 'sv' => 'Swedish', 'th' => 'Thai', 'tr' => 'Turkish', 'uk' => 'Ukrainian',
+        'ur' => 'Urdu', 'vi' => 'Vietnamese', 'zh-cn' => 'Chinese (Simplified)', 'zh-tw' => 'Chinese (Traditional)',
+    );
+
+    function __construct() {
 parent::__construct(
 // Base ID of your widget
   'twwidget',
@@ -38,7 +48,6 @@ foreach ($this->parameters as $i) {
         $instance[$i]=FALSE;
     }
 }
-var_dump($instance);
     ?>
 <p>
       <label for="Title">Title:</label>
@@ -84,7 +93,7 @@ var_dump($instance);
                    $this->output_option($i, $instance[$i]);
         }      
            ?>
-    <label for="theme">theme:</label>
+    <label for="theme">Theme:</label>
  <select name="<?php echo $this->get_field_name( 'theme'); ?>">
            <?php 
     $options=array('Light','Dark');
@@ -93,6 +102,19 @@ var_dump($instance);
    echo  '<option value="'. $t .'" selected>' . stripslashes($t) .'</option>';
     }else{
         echo  '<option value="'. $t .'">' . stripslashes($t) .'</option>';
+    }
+} ?>
+    </select>
+</p>
+<p>
+<label for="theme">Language:</label>
+<select name="<?php echo $this->get_field_name( 'lang'); ?>">
+     <?php 
+    foreach($this->lang as $i=>$v) {
+        if(strcmp($instance['lang'],$i)==0){
+   echo  '<option value="'. $i .'" selected>' . stripslashes($v) .'</option>';
+    }else{
+        echo  '<option value="'. $i .'">' . stripslashes($v) .'</option>';
     }
 } ?>
     </select>
@@ -110,6 +132,7 @@ public function update( $new_instance, $old_instance ) {
     $instance['height'] = ( ! empty( $new_instance['height'] ) ) ? strip_tags( $new_instance['height'] ) : '';
     $instance['width'] = ( ! empty( $new_instance['width'] ) ) ? strip_tags( $new_instance['width'] ) : '';
     $instance['theme'] = ( ! empty( $new_instance['theme'] ) ) ? strip_tags( $new_instance['theme'] ) : '';
+     $instance['lang'] = ( ! empty( $new_instance['lang'] ) ) ? strip_tags( $new_instance['lang'] ) : '';
     return $instance;
 }
 function output_option($type,$checked){?>
@@ -150,6 +173,7 @@ function output($instance){?>
    width="<?php echo $instance['width']; ?>"
    height="<?php echo $instance['height']; ?>"
     data-chrome="<?php  foreach (array_slice($instance, 5) as $i => $v) {if($v){echo $i .' ';}}?>"
+    data-lang="<?php echo $instance['lang']; ?>"
    >
     Tweets by @<?php echo $username; ?></a>
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
