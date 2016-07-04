@@ -93,6 +93,16 @@ foreach ($this->parameters as $i) {
                    $this->output_option($i, $instance[$i]);
         }      
            ?>
+           <label>Tweet Limit:</label>
+           <input
+                id="<?php echo $this->get_field_id('limit'); ?>" 
+                name="<?php echo $this->get_field_name('limit'); ?>" 
+               type="number" 
+               min="1"
+               max="20"
+               value="<?php echo $instance['limit']; ?>"
+                  />
+           <br/>
     <label for="theme">Theme:</label>
  <select name="<?php echo $this->get_field_name( 'theme'); ?>">
            <?php 
@@ -133,6 +143,8 @@ public function update( $new_instance, $old_instance ) {
     $instance['width'] = ( ! empty( $new_instance['width'] ) ) ? strip_tags( $new_instance['width'] ) : '';
     $instance['theme'] = ( ! empty( $new_instance['theme'] ) ) ? strip_tags( $new_instance['theme'] ) : '';
      $instance['lang'] = ( ! empty( $new_instance['lang'] ) ) ? strip_tags( $new_instance['lang'] ) : '';
+     $instance['limit'] = ($new_instance['limit']<=0) ? 1:$new_instance['limit'];
+      $instance['limit'] = ( $instance['limit']>20) ? 20: $instance['limit'];
     return $instance;
 }
 function output_option($type,$checked){?>
@@ -174,6 +186,7 @@ function output($instance){?>
    height="<?php echo $instance['height']; ?>"
     data-chrome="<?php  foreach (array_slice($instance, 5) as $i => $v) {if($v){echo $i .' ';}}?>"
     data-lang="<?php echo $instance['lang']; ?>"
+    data-tweet-limit="<?php echo $instance['limit'];?>"
    >
     Tweets by @<?php echo $username; ?></a>
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
