@@ -21,7 +21,7 @@ public $statusParam=array('cover','header','faces','adpwidth');
                 // Widget description
                 array('description' => __('Facebook page plugin widget', 'WM_widget_domain'),)
         );
-        //wp_enqueue_script('script', '/'. basename(plugin_dir_url( __FILE__ )) . '/newjavascript.js', array('jquery'));
+        wp_enqueue_script('script', plugin_dir_url(__FILE__) . 'newjavascript.js', array('jquery'));
     }
 
 // Creating widget front-end
