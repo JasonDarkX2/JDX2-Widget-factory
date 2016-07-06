@@ -21,7 +21,9 @@ public $statusParam=array('cover','header','faces','adpwidth');
                 // Widget description
                 array('description' => __('Facebook page plugin widget', 'WM_widget_domain'),)
         );
+        if(is_admin()){
         wp_enqueue_script('script', plugin_dir_url(__FILE__) . 'newjavascript.js', array('jquery'));
+        }
     }
 
 // Creating widget front-end
@@ -57,16 +59,6 @@ public $statusParam=array('cover','header','faces','adpwidth');
 // Widget Backend 
     public function form($instance) {
         //admin form
-        $title = $instance['title'];
-        $url = $instance['url'];
-        $dropList = $instance['dropList'];
-        $cover = $instance['cover'];
-        $header = $instance['header'];
-        $faces = $instance['faces'];
-        $adpwidth = $instance['adpwidth'];
-        $tabs = $instance['tabs'];
-        $name = $instance['name'];
-        $width = $instance['width'];
         ?>
         <p>
 
@@ -75,7 +67,7 @@ public $statusParam=array('cover','header','faces','adpwidth');
                 id="<?php echo $this->get_field_id('title'); ?>" 
                 name="<?php echo $this->get_field_name('title'); ?>" 
                 type="text" 
-                value="<?php echo esc_attr($title); ?>" 
+                value="<?php echo esc_attr($instance['title']); ?>" 
                 />
             <br/>
             <label for="text">FaceBook Page URL:</label>
@@ -83,14 +75,14 @@ public $statusParam=array('cover','header','faces','adpwidth');
                 id="<?php echo $this->get_field_id('url'); ?>" 
                 name="<?php echo $this->get_field_name('url'); ?>" 
                 type="text"
-                value="<?php echo esc_attr($url); ?>"</input>
+                value="<?php echo esc_attr($instance['url']); ?>"</input>
             <br/>
                        <?php
                foreach ($this->statusParam as $i) {
                    $this->output_option($i, $instance[$i]);
         }      
            ?>
-            
+            <label id="displayrange"></label>
             180<input 
                 id="<?php echo $this->get_field_id('width'); ?>" 
                 name="<?php echo $this->get_field_name('width'); ?>" 
@@ -98,9 +90,8 @@ public $statusParam=array('cover','header','faces','adpwidth');
                 min="180"
                 max="500"
                 step="1"
-                value="<?php echo $width;?>"
+                value="<?php echo $instance['width'];?>"
                 />500
-            <label id="displayrange"></label>
             <br/>
             <label for="options">Tabs:</label>
             <select name="<?php echo $this->get_field_name('tabs'); ?>">
