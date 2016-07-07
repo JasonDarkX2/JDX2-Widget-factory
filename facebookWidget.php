@@ -91,7 +91,7 @@ public $statusParam=array('cover','header','faces','adpwidth');
                 max="500"
                 step="1"
                 value="<?php echo $instance['width'];?>"
-                />500
+                /><label class="sliderval"><?php echo $instance['width'];?></label>
             <br/>
             <label for="options">Tabs:</label>
             <select name="<?php echo $this->get_field_name('tabs'); ?>">
