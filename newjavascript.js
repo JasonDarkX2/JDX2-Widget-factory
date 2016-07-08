@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 jQuery(document).ready(function(){ 
-    jQuery("#widget-fbwidget-3-width").on("input", function(){jQuery("#widget-fbwidget-3-width").next().html(this.value)}) ;
+    jQuery('input[type="range"]').on("input", function(){jQuery(this).next().html(this.value)}) ;
     
-    alert('here');})
+    //alert('here');
+    })
