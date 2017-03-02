@@ -36,6 +36,7 @@ public function widget( $args, $instance ) {
    id="<?php echo $this->get_field_id( 'title' ); ?>" 
    name="<?php echo $this->get_field_name( 'title' ); ?>" 
    type="text" 
+   style="width:100%;"
    value="<?php echo esc_attr( $title ); ?>" 
    />
    <br/>
