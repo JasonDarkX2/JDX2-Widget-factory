@@ -41,17 +41,35 @@ public function widget( $args, $instance ) {
    />
    <br/>
 <label for="content">Ad Unit Code:</label>
-    <textarea 
-        rows="20" cols="60"
+    <textarea  rows="20"
+        style="-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+
+	width: 100%;"
    id="<?php echo $this->get_field_id( 'content' ); ?>" 
    name="<?php echo $this->get_field_name( 'content' ); ?>"  
    ><?php echo esc_attr( $text);?></textarea>
     <br/>
+    <label for="options">Ad unit size:</label>
+ <select name="<?php echo$this->get_field_name( 'adSize'); ?>" style="width:100%;">
+        <option value="">Options</option>
+           <?php 
+    $options=array('300 x 250','336 x 280','728 x 90','160 x 600','responsive');
+    foreach($options as $t) {
+    if(strcmp($instance['adSize'],$t)==0){
+   echo  '<option value="'. $t .'" selected>' . stripslashes($t) .'</option>';
+    }else{
+        echo  '<option value="'. $t .'">' . stripslashes($t) .'</option>';
+    }
+} ?>
+    </select>
 <?php }
 public function update($new_instance, $old_instance) {
         $instance = array();
         $instance['content'] = (!empty($new_instance['content']) ) ? $new_instance['content'] : '';
         $instance['title'] = (!empty($new_instance['title']) ) ? $new_instance['title'] : '';
+        $instance['dropList'] = ( ! empty( $new_instance['adSize'] ) ) ? strip_tags( $new_instance['adSize'] ) : '';
         return $instance;
 }
 }
