@@ -40,6 +40,24 @@ public function widget( $args, $instance ) {
    value="<?php echo esc_attr( $title ); ?>" 
    />
    <br/>
+   <label for="title"> ad client id:</label>
+   <input 
+   id="<?php echo $this->get_field_id( 'adClient' ); ?>" 
+   name="<?php echo $this->get_field_name( 'adClient' ); ?>" 
+   type="text" 
+   style="width:100%;"
+   value="<?php echo esc_attr( $title ); ?>" 
+   />
+   <br/>
+   <label for="title"> ad slot id:</label>
+   <input 
+   id="<?php echo $this->get_field_id( 'adSlot' ); ?>" 
+   name="<?php echo $this->get_field_name( 'adSlot' ); ?>" 
+   type="text" 
+   style="width:100%;"
+   value="<?php echo esc_attr( $title ); ?>" 
+   />
+   <br/>
 <label for="content">Ad Unit Code:</label>
     <textarea  rows="20"
         style="-webkit-box-sizing: border-box;
@@ -69,6 +87,8 @@ public function update($new_instance, $old_instance) {
         $instance = array();
         $instance['content'] = (!empty($new_instance['content']) ) ? $new_instance['content'] : '';
         $instance['title'] = (!empty($new_instance['title']) ) ? $new_instance['title'] : '';
+        $instance['title'] = (!empty($new_instance['adClient']) ) ? $new_instance['adClient'] : '';
+        $instance['title'] = (!empty($new_instance['adSlot']) ) ? $new_instance['adSlot'] : '';
         $instance['adSize'] = ( ! empty( $new_instance['adSize'] ) ) ? strip_tags( $new_instance['adSize'] ) : '';
         return $instance;
 }
