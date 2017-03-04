@@ -69,7 +69,7 @@ public function update($new_instance, $old_instance) {
         $instance = array();
         $instance['content'] = (!empty($new_instance['content']) ) ? $new_instance['content'] : '';
         $instance['title'] = (!empty($new_instance['title']) ) ? $new_instance['title'] : '';
-        $instance['dropList'] = ( ! empty( $new_instance['adSize'] ) ) ? strip_tags( $new_instance['adSize'] ) : '';
+        $instance['adSize'] = ( ! empty( $new_instance['adSize'] ) ) ? strip_tags( $new_instance['adSize'] ) : '';
         return $instance;
 }
 }
