@@ -72,7 +72,31 @@ public function update($new_instance, $old_instance) {
         $instance['adSize'] = ( ! empty( $new_instance['adSize'] ) ) ? strip_tags( $new_instance['adSize'] ) : '';
         return $instance;
 }
+function get_size(){
+    
+  switch($instance['adSize']) {
+      case '300 x 250':
+          
+          break;
+      case '336 x 280':
+          
+          break;
+      case '728 x 90':
+     
+          break;
+      case  '160 x 600':
+          
+          break;
+      case 'responsive':
+          
+      default:
+          
+          }
+          return $size;
 }
+}
+
+
 function Adsense_widget() {
 	register_widget( 'Adsense_widget' );
 }
