@@ -76,19 +76,19 @@ function get_size(){
     
   switch($instance['adSize']) {
       case '300 x 250':
-          
+          $size= "width:300px;height:250px";
           break;
       case '336 x 280':
-          
+           $size= "width:336px;height:280px";
           break;
       case '728 x 90':
-     
+      $size= "width:728px;height:90px";
           break;
       case  '160 x 600':
-          
+           $size= "width:300px;height:250px";
           break;
       case 'responsive':
-          
+          $size="";
       default:
           
           }
