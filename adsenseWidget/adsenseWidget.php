@@ -33,6 +33,19 @@ public function widget( $args, $instance ) {
         $adClient= $instance['adClient'];
         $adSlot= $instance['adSlot']
 ?>
+<label for="options">Ad Header:</label>
+ <select name="<?php echo$this->get_field_name( 'adHeader'); ?>" style="width:100%;">
+        <option value="">Options</option>
+           <?php 
+    $options=array('Advertisement(center)','Adertisement(right)','Advertisement(left)','Sponsored Ads(center)','Sponsored Ads(right)', 'Sponsored Ads(left)');
+    foreach($options as $t) {
+    if(strcmp($instance['adHeader'],$t)==0){
+   echo  '<option value="'. $t .'" selected>' . stripslashes($t) .'</option>';
+    }else{
+        echo  '<option value="'. $t .'">' . stripslashes($t) .'</option>';
+    }
+} ?>
+    </select>
 <label for="title">Title:</label>
    <input 
    id="<?php echo $this->get_field_id( 'title' ); ?>" 
@@ -92,6 +105,7 @@ public function update($new_instance, $old_instance) {
         $instance['title'] = (!empty($new_instance['adClient']) ) ? $new_instance['adClient'] : '';
         $instance['title'] = (!empty($new_instance['adSlot']) ) ? $new_instance['adSlot'] : '';
         $instance['adSize'] = ( ! empty( $new_instance['adSize'] ) ) ? strip_tags( $new_instance['adSize'] ) : '';
+         $instance['adHeader'] = ( ! empty( $new_instance['adHeader'] ) ) ? strip_tags( $new_instance['adHeader'] ) : '';
         return $instance;
 }
 function get_size(){
