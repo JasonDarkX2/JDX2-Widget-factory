@@ -30,6 +30,8 @@ public function widget( $args, $instance ) {
         //admin form
         $title= $instance['title'];
         $text= $instance['content'];
+        $adClient= $instance['adClient'];
+        $adSlot= $instance['adSlot']
 ?>
 <label for="title">Title:</label>
    <input 
@@ -46,7 +48,7 @@ public function widget( $args, $instance ) {
    name="<?php echo $this->get_field_name( 'adClient' ); ?>" 
    type="text" 
    style="width:100%;"
-   value="<?php echo esc_attr( $title ); ?>" 
+   value="<?php echo esc_attr( $adClient ); ?>" 
    />
    <br/>
    <label for="title"> ad slot id:</label>
@@ -55,7 +57,7 @@ public function widget( $args, $instance ) {
    name="<?php echo $this->get_field_name( 'adSlot' ); ?>" 
    type="text" 
    style="width:100%;"
-   value="<?php echo esc_attr( $title ); ?>" 
+   value="<?php echo esc_attr( $adSlot ); ?>" 
    />
    <br/>
 <label for="content">Ad Unit Code:</label>
