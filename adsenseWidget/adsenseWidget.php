@@ -130,6 +130,27 @@ function get_size(){
           }
           return $size;
 }
+function get_header(){
+    switch($instance['adHeader']){
+        case 'adc':
+            return '<p align="center">Advertisement</p>';
+            break;
+        case 'adr':
+            return '<p align="right">Advertisement</p>';
+            break;
+        case 'adl':
+            return '<p align="left">Advertisement</p>';
+        case 'sadc':
+            return '<p align="center">Sponsored Ads</p>';
+            break;
+        case 'sadr':
+            return '<p align="right">Sponsored Ads</p>';
+            break;
+        case 'sadl':
+            return '<p align="left">Sponsored Ads</p>';
+            break;
+    }
+}
 }
 
 
