@@ -37,12 +37,12 @@ public function widget( $args, $instance ) {
  <select name="<?php echo$this->get_field_name( 'adHeader'); ?>" style="width:100%;">
         <option value="">Options</option>
            <?php 
-    $options=array('Advertisement(center)','Adertisement(right)','Advertisement(left)','Sponsored Ads(center)','Sponsored Ads(right)', 'Sponsored Ads(left)');
-    foreach($options as $t) {
-    if(strcmp($instance['adHeader'],$t)==0){
-   echo  '<option value="'. $t .'" selected>' . stripslashes($t) .'</option>';
+    $options=array('adc'=>'Advertisement(center)','adr'=>'Adertisement(right)','adl'=>'Advertisement(left)','sadc'=>'Sponsored Ads(center)','sadr'=>'Sponsored Ads(right)','sadl'=>'Sponsored Ads(left)');
+    foreach($options as $value=> $title) {
+    if(strcmp($instance['adHeader'],$value)==0){
+   echo  '<option value="'. $value .'" selected>' . stripslashes($title) .'</option>';
     }else{
-        echo  '<option value="'. $t .'">' . stripslashes($t) .'</option>';
+        echo  '<option value="'. $value .'">' . stripslashes($title) .'</option>';
     }
 } ?>
     </select>
