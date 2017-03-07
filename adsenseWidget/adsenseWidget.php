@@ -22,8 +22,7 @@ array( 'description' => __( ' Adnse widgets allows you to easily place your ad s
 // Creating widget front-end
 // This is where the action happens
 public function widget( $args, $instance ) {
-    echo '<i>'. $instance['title'] .'</i>';
-     echo $instance['content'];
+    $this->get_adHeader($instance['adHeader']);
 }
 // Widget Backend 
     public function form($instance) {
@@ -46,15 +45,6 @@ public function widget( $args, $instance ) {
     }
 } ?>
     </select>
-<label for="title">Title:</label>
-   <input 
-   id="<?php echo $this->get_field_id( 'title' ); ?>" 
-   name="<?php echo $this->get_field_name( 'title' ); ?>" 
-   type="text" 
-   style="width:100%;"
-   value="<?php echo esc_attr( $title ); ?>" 
-   />
-   <br/>
    <label for="title"> ad client id:</label>
    <input 
    id="<?php echo $this->get_field_id( 'adClient' ); ?>" 
@@ -108,9 +98,9 @@ public function update($new_instance, $old_instance) {
          $instance['adHeader'] = ( ! empty( $new_instance['adHeader'] ) ) ? strip_tags( $new_instance['adHeader'] ) : '';
         return $instance;
 }
-function get_size(){
+function get_size($instance){
     
-  switch($instance['adSize']) {
+  switch($instance) {
       case '300 x 250':
           $size= "width:300px;height:250px";
           break;
@@ -130,25 +120,27 @@ function get_size(){
           }
           return $size;
 }
-function get_header(){
-    switch($instance['adHeader']){
+  function get_adHeader($instance){
+    switch($instance){
         case 'adc':
-            return '<p align="center">Advertisement</p>';
+            echo '<p align="center">Advertisement</p>';
             break;
         case 'adr':
-            return '<p align="right">Advertisement</p>';
+            echo '<p align="right">Advertisement</p>';
             break;
         case 'adl':
-            return '<p align="left">Advertisement</p>';
+            echo '<p align="left">Advertisement</p>';
         case 'sadc':
-            return '<p align="center">Sponsored Ads</p>';
+            echo '<p align="center">Sponsored Ads</p>';
             break;
         case 'sadr':
-            return '<p align="right">Sponsored Ads</p>';
+            echo '<p align="right">Sponsored Ads</p>';
             break;
         case 'sadl':
-            return '<p align="left">Sponsored Ads</p>';
+            echo '<p align="left">Sponsored Ads</p>';
             break;
+        default :
+            echo '<p align="center">Advertisement</p>';
     }
 }
 }
