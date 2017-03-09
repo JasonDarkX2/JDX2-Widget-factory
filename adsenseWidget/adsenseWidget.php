@@ -23,7 +23,9 @@ array( 'description' => __( ' Adnse widgets allows you to easily place your ad s
 // This is where the action happens
 public function widget( $args, $instance ) {
     $this->get_adHeader($instance['adHeader']);
+    echo '<div class="adwrap" style="text-align:center;">';
     $this->create_ad($instance);
+    echo '</div>';
 }
 // Widget Backend 
     public function form($instance) {
@@ -64,22 +66,11 @@ public function widget( $args, $instance ) {
    value="<?php echo esc_attr( $adSlot ); ?>" 
    />
    <br/>
-<label for="content">Ad Unit Code:</label>
-    <textarea  rows="20"
-        style="-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-
-	width: 100%;"
-   id="<?php echo $this->get_field_id( 'content' ); ?>" 
-   name="<?php echo $this->get_field_name( 'content' ); ?>"  
-   ><?php echo esc_attr( $text);?></textarea>
-    <br/>
     <label for="options">Ad unit size:</label>
  <select name="<?php echo$this->get_field_name( 'adSize'); ?>" style="width:100%;">
         <option value="">Options</option>
            <?php 
-    $options=array('300 x 250','336 x 280','728 x 90','160 x 600','responsive');
+    $options=array('300 x 250','336 x 280','728 x 90','160 x 600','300 x 600','responsive');
     foreach($options as $t) {
     if(strcmp($instance['adSize'],$t)==0){
    echo  '<option value="'. $t .'" selected>' . stripslashes($t) .'</option>';
@@ -91,7 +82,6 @@ public function widget( $args, $instance ) {
 <?php }
 public function update($new_instance, $old_instance) {
         $instance = array();
-        $instance['content'] = (!empty($new_instance['content']) ) ? $new_instance['content'] : '';
         $instance['title'] = (!empty($new_instance['title']) ) ? $new_instance['title'] : '';
         $instance['adClient'] = (!empty($new_instance['adClient']) ) ? $new_instance['adClient'] : '';
         $instance['adSlot'] = (!empty($new_instance['adSlot']) ) ? $new_instance['adSlot'] : '';
@@ -112,7 +102,9 @@ function get_size($instance){
       $size= "width:728px;height:90px";
           break;
       case  '160 x 600':
-           $size= "width:300px;height:250px";
+           $size= "width:160px;height:600px";
+      case  '300 x 600':
+           $size= "width:300px;height:600px";
           break;
       case 'responsive':
           $size="";
@@ -149,7 +141,7 @@ function create_ad($instance){?>
     <ins class="adsbygoogle"
          style="display:inline-block; <?php echo $this->get_size($instance['adSize']); ?>"
          data-ad-client="<?php echo $instance['adClient']; ?>"
-         data-ad-slot="<?php echo $instance['adSlot']; ?>"
+         data-ad-slot="<?php echo $instance['adSlot']; ?>"</ins>
          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 <?php }
 }
