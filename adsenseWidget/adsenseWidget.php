@@ -23,6 +23,7 @@ array( 'description' => __( ' Adnse widgets allows you to easily place your ad s
 // This is where the action happens
 public function widget( $args, $instance ) {
     $this->get_adHeader($instance['adHeader']);
+    $this->create_ad($instance);
 }
 // Widget Backend 
     public function form($instance) {
@@ -92,8 +93,8 @@ public function update($new_instance, $old_instance) {
         $instance = array();
         $instance['content'] = (!empty($new_instance['content']) ) ? $new_instance['content'] : '';
         $instance['title'] = (!empty($new_instance['title']) ) ? $new_instance['title'] : '';
-        $instance['title'] = (!empty($new_instance['adClient']) ) ? $new_instance['adClient'] : '';
-        $instance['title'] = (!empty($new_instance['adSlot']) ) ? $new_instance['adSlot'] : '';
+        $instance['adClient'] = (!empty($new_instance['adClient']) ) ? $new_instance['adClient'] : '';
+        $instance['adSlot'] = (!empty($new_instance['adSlot']) ) ? $new_instance['adSlot'] : '';
         $instance['adSize'] = ( ! empty( $new_instance['adSize'] ) ) ? strip_tags( $new_instance['adSize'] ) : '';
          $instance['adHeader'] = ( ! empty( $new_instance['adHeader'] ) ) ? strip_tags( $new_instance['adHeader'] ) : '';
         return $instance;
@@ -143,6 +144,14 @@ function get_size($instance){
             echo '<p align="center">Advertisement</p>';
     }
 }
+function create_ad($instance){?>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle"
+         style="display:inline-block; <?php echo $this->get_size($instance['adSize']); ?>"
+         data-ad-client="<?php echo $instance['adClient']; ?>"
+         data-ad-slot="<?php echo $instance['adSlot']; ?>"
+         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+<?php }
 }
 
 
