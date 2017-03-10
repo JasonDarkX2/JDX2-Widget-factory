@@ -37,7 +37,7 @@ public function widget( $args, $instance ) {
 ?>
 <label for="options">Ad Header:</label>
  <select name="<?php echo$this->get_field_name( 'adHeader'); ?>" style="width:100%;">
-        <option value="">Options</option>
+        <option value="">Options:</option>
            <?php 
     $options=array('adc'=>'Advertisement(center)','adr'=>'Adertisement(right)','adl'=>'Advertisement(left)','sadc'=>'Sponsored Ads(center)','sadr'=>'Sponsored Ads(right)','sadl'=>'Sponsored Ads(left)');
     foreach($options as $value=> $title) {
@@ -79,6 +79,20 @@ public function widget( $args, $instance ) {
     }
 } ?>
     </select>
+    <br/>
+    <label for="options"> Wrap Ad:</label>
+ <select name="<?php echo$this->get_field_name( 'adWrap'); ?>" style="width:100%;">
+        <option value="">Options:</option>
+           <?php 
+    $options=array('Theme widgets','none', 'black box','white box');
+    foreach($options as $t) {
+    if(strcmp($instance['adWrap'],$t)==0){
+   echo  '<option value="'. $t .'" selected>' . stripslashes($t) .'</option>';
+    }else{
+        echo  '<option value="'. $t .'">' . stripslashes($t) .'</option>';
+    }
+} ?>
+    </select>
 <?php }
 public function update($new_instance, $old_instance) {
         $instance = array();
@@ -87,6 +101,7 @@ public function update($new_instance, $old_instance) {
         $instance['adSlot'] = (!empty($new_instance['adSlot']) ) ? $new_instance['adSlot'] : '';
         $instance['adSize'] = ( ! empty( $new_instance['adSize'] ) ) ? strip_tags( $new_instance['adSize'] ) : '';
          $instance['adHeader'] = ( ! empty( $new_instance['adHeader'] ) ) ? strip_tags( $new_instance['adHeader'] ) : '';
+         $instance['adWrap'] = ( ! empty( $new_instance['adWrap'] ) ) ? strip_tags( $new_instance['adWrap'] ) : '';
         return $instance;
 }
 function get_size($instance){
