@@ -22,10 +22,39 @@ array( 'description' => __( ' Adnse widgets allows you to easily place your ad s
 // Creating widget front-end
 // This is where the action happens
 public function widget( $args, $instance ) {
-    $this->get_adHeader($instance['adHeader']);
+    switch ($instance['adWrap']) {
+        case 'Theme widgets':
+                echo $args['before_widget'];
+    echo $args['before_title'] . $this->get_adHeader($instance['adHeader'])  . $args['after_title'];
+    $this->create_ad($instance);
+     echo $args['after_widget'];
+            break;
+        case 'none':
+                $this->get_adHeader($instance['adHeader']);
     echo '<div class="adwrap" style="text-align:center;">';
     $this->create_ad($instance);
     echo '</div>';
+            break;
+        case 'Black box':
+            echo '<div style="background-color:#000000;">';
+            $this->get_adHeader($instance['adHeader']);
+    echo '<div class="adwrap" style="text-align:center;">';
+    $this->create_ad($instance);
+    echo '</div>';
+    echo '</div>';
+    break;
+case 'White box':
+            echo '<div style="background-color:#FFFFFF;">';
+            $this->get_adHeader($instance['adHeader']);
+    echo '<div class="adwrap" style="text-align:center;">';
+    $this->create_ad($instance);
+    echo '</div>';
+    echo '</div>';
+    break;
+        default:
+            break;
+    }
+
 }
 // Widget Backend 
     public function form($instance) {
@@ -84,7 +113,7 @@ public function widget( $args, $instance ) {
  <select name="<?php echo$this->get_field_name( 'adWrap'); ?>" style="width:100%;">
         <option value="">Options:</option>
            <?php 
-    $options=array('Theme widgets','none', 'black box','white box');
+    $options=array('Theme widgets','none', 'Black box','White box');
     foreach($options as $t) {
     if(strcmp($instance['adWrap'],$t)==0){
    echo  '<option value="'. $t .'" selected>' . stripslashes($t) .'</option>';
