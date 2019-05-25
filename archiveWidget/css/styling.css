@@ -1,0 +1,12 @@
+//styling for ArchiveWidget
+.sideitems li a{vertical-align: middle;display: table-cell;}
+.sideitems li:before {font-size: 20px;display: table-cell;   vertical-align: middle;}
+.sideitems ul li:not(:last-child):after {content: "";display: block;height: 1px;width: 98%;}
+.Ayear{font-weight: bolder;color:red !important;}
+.Ayear:hover{color:orange !important;}
+#widget_jdx2-archive_widget li:before{content:"";}
+.yeartwrap a:before{ font-size:18px; content: "\21B3 \0020" ;}
+.yeartwrap{margin-left: 15px;display:table;}
+.twrap{display:table;}
+.sideitems li a{vertical-align: middle; display:table-cell;}
+.numPost{display: table-cell;}
