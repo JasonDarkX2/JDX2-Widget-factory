@@ -7,7 +7,6 @@
   Author URI:http://www.jasondarkx2.com/
  */
 ?>
-
 <?php
 
 class fb_widget extends WP_Widget {
