@@ -7,7 +7,6 @@ Author:Jason Dark X2
 Author URI:http://www.jasondarkx2.com/ 
 */ 
 ?>
-
 <?php
 
 class stnd_widget extends WP_Widget {
