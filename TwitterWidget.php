@@ -7,9 +7,7 @@
   Author URI:http://www.jasondarkx2.com/
  */
 ?>
-
 <?php
-
 class tw_widget extends WP_Widget {
 
     public $parameters = array('replies', 'nofooter', 'noheader', 'noborders', 'noscrollbar', 'transparent');
@@ -189,11 +187,8 @@ class tw_widget extends WP_Widget {
     }
 
 }
-
 function output($instance) {
     ?>
-
-
     <a class="twitter-timeline" data-theme="<?php echo $instance['theme']; ?>"   href="https://twitter.com/<?php echo $instance['username']; ?>" 
        width="<?php echo $instance['width']; ?>"
        height="<?php echo $instance['height']; ?>"
@@ -207,7 +202,6 @@ function output($instance) {
        >
         Tweets by @<?php echo $username; ?></a>
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
 <?php
 }
 
