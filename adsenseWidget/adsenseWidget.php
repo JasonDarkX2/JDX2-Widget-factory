@@ -69,7 +69,13 @@ case 'White box':
  <select name="<?php echo$this->get_field_name( 'adHeader'); ?>" style="width:100%;">
         <option value="">Options:</option>
            <?php 
-    $options=array('adc'=>'Advertisement(center)','adr'=>'Adertisement(right)','adl'=>'Advertisement(left)','sadc'=>'Sponsored Ads(center)','sadr'=>'Sponsored Ads(right)','sadl'=>'Sponsored Ads(left)');
+    $options=array( 'none' => 'No header',
+                    'adc'=>'Advertisement(center)',
+                    'adr'=>'Adertisement(right)',
+                    'adl'=>'Advertisement(left)',
+                    'sadc'=>'Sponsored Ads(center)',
+                    'sadr'=>'Sponsored Ads(right)',
+                    'sadl'=>'Sponsored Ads(left)');
     foreach($options as $value=> $title) {
     if(strcmp($instance['adHeader'],$value)==0){
    echo  '<option value="'. $value .'" selected>' . stripslashes($title) .'</option>';
@@ -190,8 +196,10 @@ function get_size($instance){
         case 'sadl':
             echo '<p align="left">Sponsored Ads</p>';
             break;
+        case 'none':
+            break;
         default :
-            echo '<p align="center">Advertisement</p>';
+            echo '';
     }
 }
 function create_ad($instance){?>
