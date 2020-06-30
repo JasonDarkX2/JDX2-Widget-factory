@@ -200,7 +200,7 @@ function output($instance) {
        data-lang="<?php echo $instance['lang']; ?>"
        data-tweet-limit="<?php echo $instance['limit']; ?>"
        >
-        Tweets by @<?php echo $username; ?></a>
+        Tweets by @<?php  echo $instance['username']; ?></a>
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 <?php
 }

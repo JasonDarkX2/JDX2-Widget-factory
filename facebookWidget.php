@@ -37,6 +37,12 @@ public $statusParam=array('cover','header','faces','adpwidth');
             $status[$i] = ($v) ? 'true' : 'false';
         }
         ?>
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous"
+                src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0"
+                nonce="vG0h43MP">
+
+        </script>
         <div class="fb-page" data-href="<?php echo $instance['url']; ?>" 
              data-tabs="<?php echo $instance['tabs']; ?>" 
              data-small-header="<?php echo $status['header']; ?>" 
@@ -97,6 +103,7 @@ public $statusParam=array('cover','header','faces','adpwidth');
                 <option value=" ">Options</option>
                 <?php
                 $options = array('timeline', 'event', 'message', 'timeline,event,message', 'none');
+                $tabs=$instance['tabs'];
                 foreach ($options as $t) {
                     if (strcmp($tabs, $t) == 0) {
                         echo '<option value="' . $t . '" selected>' . stripslashes($t) . '</option>';
