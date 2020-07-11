@@ -45,10 +45,10 @@ public $statusParam=array('cover','header','faces','adpwidth');
         </script>
         <div class="fb-page" data-href="<?php echo $instance['url']; ?>" 
              data-tabs="<?php echo $instance['tabs']; ?>" 
-             data-small-header="<?php echo $status['header']; ?>" 
+             data-small-header="<?php echo $instance['header']; ?>"
              data-width="<?php echo $instance['width']; ?>" 
              data-adapt-container-width="<?php echo $status['adpwidth']; ?>" 
-             data-hide-cover="<?php echo $status['cover']; ?>"  
+             data-hide-cover="<?php echo $instance['cover']; ?>"
              data-show-facepile="<?php echo $status['faces']; ?>">
             <div class="fb-xfbml-parse-ignore">
                 <blockquote cite="<?php echo $instance['url']; ?>">
@@ -75,7 +75,7 @@ public $statusParam=array('cover','header','faces','adpwidth');
                 value="<?php echo esc_attr($instance['title']); ?>" 
                 />
             <br/>
-            <label for="text">FaceBook Page URL:</label>
+            <label for="text">FaceBook Username:</label>
             <input
                 id="<?php echo $this->get_field_id('url'); ?>" 
                 name="<?php echo $this->get_field_name('url'); ?>" 
@@ -124,7 +124,7 @@ public $statusParam=array('cover','header','faces','adpwidth');
             $instance[$i] = (isset($new_instance[$i]) && $new_instance[$i]!=NULL) ? true : false;
         }
         $instance['title'] = (!empty($new_instance['title']) ) ? strip_tags($new_instance['title']) : '';
-        $instance['url'] = (!empty($new_instance['url']) ) ? strip_tags($new_instance['url']) : '';
+        $instance['url'] = 'https://facebook.com/'. (!empty($new_instance['url']) ) ? strip_tags($new_instance['url']) : '';
         $instance['width'] =($new_instance['width']>500||$new_instance['width']<180 ? 180 :$new_instance['width'] );
         $instance['tabs'] = (!empty($new_instance['tabs']) ) ? strip_tags($new_instance['tabs']) : '';
         $matches = array();
