@@ -64,7 +64,6 @@ case 'White box':
         $adClient= $instance['adClient'];
         $adSlot= $instance['adSlot'];
         $testData= $instance['testData'];
-        $cspnonce=$instance['CSPnonce'];
 ?>
 <label for="options">Ad Header:</label>
  <select name="<?php echo$this->get_field_name( 'adHeader'); ?>" style="width:100%;">
@@ -142,15 +141,6 @@ case 'White box':
                 echo '<input type="radio" name="' . $this->get_field_name( 'testData')  . '"  value="off" checked>Off<br>';
             }?>
         </span>
-        <label for="title">CSP nonce:</label>
-        <input
-                id="<?php echo $this->get_field_id( 'CSPnonce' ); ?>"
-                name="<?php echo $this->get_field_name( 'CSPnonce' ); ?>"
-                type="text"
-                style="width:100%;"
-                value="<?php echo esc_attr( $cspnonce ); ?>"
-        />
-        <br/>
 <?php }
 public function update($new_instance, $old_instance) {
         $instance = array();
@@ -161,7 +151,6 @@ public function update($new_instance, $old_instance) {
          $instance['adHeader'] = ( ! empty( $new_instance['adHeader'] ) ) ? strip_tags( $new_instance['adHeader'] ) : '';
          $instance['adWrap'] = ( ! empty( $new_instance['adWrap'] ) ) ? strip_tags( $new_instance['adWrap'] ) : '';
         $instance['testData'] = ( ! empty( $new_instance['testData'] ) ) ? strip_tags( $new_instance['testData'] ) : '';
-    $instance['CSPnonce'] = ( ! empty( $new_instance['CSPnonce'] ) ) ? strip_tags( $new_instance['CSPnonce'] ) : '';
         return $instance;
 }
 function get_size($instance){
@@ -214,7 +203,7 @@ function get_size($instance){
     }
 }
 function create_ad($instance){?>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" nonce="<?php echo $instance['CSPnonce']; ?>"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <ins class="adsbygoogle"
          style="display:inline-block; <?php echo $this->get_size($instance['adSize']); ?>"
          data-ad-client="<?php echo $instance['adClient']; ?>"
