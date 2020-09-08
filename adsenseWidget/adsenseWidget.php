@@ -142,7 +142,7 @@ case 'White box':
                 echo '<input type="radio" name="' . $this->get_field_name( 'testData')  . '"  value="off" checked>Off<br>';
             }?>
         </span>
-        <label for="title"> ad slot id:</label>
+        <label for="title">CSP nonce:</label>
         <input
                 id="<?php echo $this->get_field_id( 'CSPnonce' ); ?>"
                 name="<?php echo $this->get_field_name( 'CSPnonce' ); ?>"
