@@ -214,7 +214,7 @@ function get_size($instance){
     }
 }
 function create_ad($instance){?>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" nonce="<?php $instance['CSPnonce']; ?>"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" nonce="<?php echo $instance['CSPnonce']; ?>"></script>
     <ins class="adsbygoogle"
          style="display:inline-block; <?php echo $this->get_size($instance['adSize']); ?>"
          data-ad-client="<?php echo $instance['adClient']; ?>"
