@@ -11,25 +11,3 @@
  display:flex;
  flex-direction:row;
 }
-
-.sizeA{
- width:300px;
- height:250px;
-
-}
-.sizeB{
-width:336px;
- height:280px;
-}
-.sizeC{
- width:728px;
- height:90px;
-}
-.sizeD{
- width:160px;
- height:600px;
-}
-.sizeE{
- width:300px;
- height:600px;
-}

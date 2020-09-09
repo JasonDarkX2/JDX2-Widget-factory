@@ -157,18 +157,18 @@ function get_size($instance){
     
   switch($instance) {
       case '300 x 250':
-          $size= "sizeA";
+          $size= "width:300px;height:250px";
           break;
       case '336 x 280':
-           $size= "sizeB";
+           $size= "width:336px;height:280px";
           break;
       case '728 x 90':
-      $size= "sizeC";
+      $size= "width:728px;height:90px";
           break;
       case  '160 x 600':
-           $size= "sizeD";
+           $size= "width:160px;height:600px";
       case  '300 x 600':
-           $size= "sizeE";
+           $size= "width:300px;height:600px";
           break;
       case 'responsive':
           $size="";
@@ -204,7 +204,8 @@ function get_size($instance){
 }
 function create_ad($instance){?>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle <?php echo $this->get_size($instance['adSize']); ?>"
+    <ins class="adsbygoogle"
+         style="display:inline-block; <?php echo $this->get_size($instance['adSize']); ?>"
          data-ad-client="<?php echo $instance['adClient']; ?>"
          data-ad-slot="<?php echo $instance['adSlot']; ?>"
          data-adtest="<?php echo $instance['testData']; ?>"
