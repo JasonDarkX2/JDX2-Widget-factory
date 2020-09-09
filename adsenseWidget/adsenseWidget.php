@@ -132,7 +132,7 @@ case 'White box':
         <br/>
         <label for="options"> Test Data:</label>
         <br/>
-        <span class="gads">
+        <span style=" margin-top:2px; display:flex; flex-direction:row;">
             <?php if($instance['testData']=="on") {
             echo '<input type="radio" name="' . $this->get_field_name('testData') . '" value="on" checked>On<br>';
             echo '<input type="radio" name="' . $this->get_field_name('testData') . '" value="off">Off<br>';
