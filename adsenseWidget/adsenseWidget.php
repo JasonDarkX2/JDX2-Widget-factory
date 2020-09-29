@@ -60,7 +60,6 @@ case 'White box':
     public function form($instance) {
         //admin form
         $title= $instance['title'];
-        $text= $instance['content'];
         $adClient= $instance['adClient'];
         $adSlot= $instance['adSlot'];
         $testData= $instance['testData'];
