@@ -26,7 +26,7 @@ public function widget( $args, $instance ) {
         $user = wp_get_current_user();
         $allowed_roles = array('editor', 'administrator', 'author');
         if( array_intersect($allowed_roles, $user->roles ) ) {
-            echo "This Google Ads has been disabled for Adminstrator roles";
+            echo "This Google Ad has been disabled for Administrator roles";
             return;
         }
     }
@@ -152,7 +152,7 @@ case 'White box':
             }?>
         </span>
         <br/>
-        <label for="options"> Disable ad in Adminstrative/editor areas:</label>
+        <label for="options"> Disable ad for Adminstrative/Editor roles:</label>
         <br/>
         <span style=" margin-top:2px; display:flex; flex-direction:row;">
             <?php if($instance['adminDisable']=="on") {
