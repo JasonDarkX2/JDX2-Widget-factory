@@ -22,6 +22,14 @@ array( 'description' => __( ' Adnse widgets allows you to easily place your ad s
 // Creating widget front-end
 // This is where the action happens
 public function widget( $args, $instance ) {
+    if($instance['adminDisable']=="on"){
+        $user = wp_get_current_user();
+        $allowed_roles = array('editor', 'administrator', 'author');
+        if( array_intersect($allowed_roles, $user->roles ) ) {
+            echo "This Google Ads has been disabled for Adminstrator roles";
+            return;
+        }
+    }
     switch ($instance['adWrap']) {
         case 'Theme widgets':
                 echo $args['before_widget'];
@@ -58,6 +66,9 @@ case 'White box':
 }
 // Widget Backend 
     public function form($instance) {
+    if(empty($instance)){
+        $instance=$this->update($instance,$instance);
+    }
         //admin form
         $title= $instance['title'];
         $adClient= $instance['adClient'];
@@ -140,6 +151,19 @@ case 'White box':
                 echo '<input type="radio" name="' . $this->get_field_name( 'testData')  . '"  value="off" checked>Off<br>';
             }?>
         </span>
+        <br/>
+        <label for="options"> Disable ad in Adminstrative/editor areas:</label>
+        <br/>
+        <span style=" margin-top:2px; display:flex; flex-direction:row;">
+            <?php if($instance['adminDisable']=="on") {
+                echo '<input type="radio" name="' . $this->get_field_name('adminDisable') . '" value="on" checked>On<br>';
+                echo '<input type="radio" name="' . $this->get_field_name('adminDisable') . '" value="off">Off<br>';
+            }else{
+                echo'<input type="radio" name="' .  $this->get_field_name( 'adminDisable') . '"  value="on">On<br>';
+                echo '<input type="radio" name="' . $this->get_field_name( 'adminDisable')  . '"  value="off" checked>Off<br>';
+            }?>
+        </span>
+
 <?php }
 public function update($new_instance, $old_instance) {
         $instance = array();
@@ -150,6 +174,7 @@ public function update($new_instance, $old_instance) {
          $instance['adHeader'] = ( ! empty( $new_instance['adHeader'] ) ) ? strip_tags( $new_instance['adHeader'] ) : '';
          $instance['adWrap'] = ( ! empty( $new_instance['adWrap'] ) ) ? strip_tags( $new_instance['adWrap'] ) : '';
         $instance['testData'] = ( ! empty( $new_instance['testData'] ) ) ? strip_tags( $new_instance['testData'] ) : '';
+    $instance['adminDisable'] = ( ! empty( $new_instance['adminDisable'] ) ) ? strip_tags( $new_instance['adminDisable'] ) : '';
         return $instance;
 }
 function get_size($instance){
@@ -201,7 +226,10 @@ function get_size($instance){
             echo '';
     }
 }
-function create_ad($instance){?>
+function create_ad($instance){
+if($instance["adminDisable"]!="on")
+    ?>
+
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <ins class="adsbygoogle"
          style="display:inline-block; <?php echo $this->get_size($instance['adSize']); ?>"
