@@ -1,1 +1,1 @@
-/*styling for recentPostCat*/.sideitems .recentReviews li:not(:last-child):after {background:blue;}.sideitems .recentReviews li:before {content: "\1F44D  \0020";color:cyan}
+.sideitems .recentReviews li:not(:last-child):after {background:blue;}.sideitems .recentReviews li:before {content: "\1F44D  \0020";color:cyan}
